@@ -15,4 +15,8 @@ data class RedirectResponse(
     val url: String,
     val method: String,
     val params: List<Pair<String, String>>?
-)
+) {
+    override fun toString(): String {
+        return "redirect url: $url\nhttp method: $method\nparams: ${params?.forEach { "${it.first}: ${it.second}" }}"
+    }
+}

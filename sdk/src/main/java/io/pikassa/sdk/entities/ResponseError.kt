@@ -13,4 +13,8 @@ All rights received.
 data class ResponseError(
     val code: PaymentErrorCode,
     val message: String
-)
+) {
+    override fun toString(): String {
+        return "error code: ${code.toString()}\nerror message: $message"
+    }
+}
