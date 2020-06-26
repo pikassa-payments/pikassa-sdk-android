@@ -1,0 +1,17 @@
+package io.pikassa.sdk.entities
+
+/**
+Created by Denis Chornyy on 25,Июнь,2020
+All rights received.
+ */
+
+/**
+ * Class representing response from bank card request
+ * @param success the bank request result
+ * @param data
+ */
+data class CardDetailResponse(
+    val success: Boolean,
+    val data: ResponseData?,
+    val error: ResponseError?
+)
