@@ -3,7 +3,8 @@ package io.pikassa.sdk
 import io.pikassa.sdk.entities.*
 import io.pikassa.sdk.helpers.PaymentHelper
 import io.pikassa.sdk.repositories.PaymentRepository
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.*
+import java.lang.Exception
 
 /**
 Created by Denis Chornyy on 26,Июнь,2020
@@ -30,19 +31,27 @@ object Pikassa {
         requestId: String,
         paymentMethod: PaymentMethod = PaymentMethod.BANK_CARD,
         details: CardDetails,
-        onSuccess: (RedirectResponse) -> Unit,
+        onSuccess: (ResponseData) -> Unit,
         onError: (ResponseError) -> Unit
     ) {
         val body = BodyRequest(requestId, paymentMethod, details)
-        runBlocking {
-            val response =
-                paymentRepository.requestPayment(uuid, apiKey, body)
-            // Todo: Проверить, можно ли их сделать не null
-            if(response.success) {
-                response.data?.let { it.redirect?.let { it1 -> onSuccess(it1) } }
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val response =
+                    paymentRepository.requestPayment(uuid, apiKey, body)
+                withContext(Dispatchers.Main) {
+                    if(response.success) {
+                        response.data?.let { onSuccess(it) }
+                    }
+                    else {
+                        response.error?.let { onError(it) }
+                    }
+                }
             }
-            else {
-                response.error?.let { onError(it) }
+            catch (ex: Exception) {
+                // if we catch an error in working with request from sdk, call OnError and pass message in it
+                val error = ResponseError(PaymentErrorCode.SdkWorkError, "inner sdk exception: ${ex.localizedMessage}")
+                onError(error)
             }
         }
     }

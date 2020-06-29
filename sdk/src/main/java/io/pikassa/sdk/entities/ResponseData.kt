@@ -15,4 +15,8 @@ data class ResponseData(
     val uuid: String,
     val requestId: String,
     val redirect: RedirectResponse?
-)
+) {
+    override fun toString(): String {
+        return "uuid: $uuid\nrequest ID: $requestId\nredirectInfo:\n${redirect.toString()}"
+    }
+}

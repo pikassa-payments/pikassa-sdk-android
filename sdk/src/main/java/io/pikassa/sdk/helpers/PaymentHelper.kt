@@ -2,8 +2,6 @@ package io.pikassa.sdk.helpers
 
 import io.pikassa.sdk.di.component.DaggerRetrofitComponent
 import io.pikassa.sdk.entities.BodyRequest
-import io.pikassa.sdk.entities.CardDetails
-import io.pikassa.sdk.entities.PaymentMethod
 import io.pikassa.sdk.network.PaymentApi
 import javax.inject.Inject
 

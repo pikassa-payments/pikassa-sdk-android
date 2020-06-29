@@ -13,10 +13,11 @@ enum class PaymentErrorCode(val code: String) {
     AuthorizeAccountError("2"),
     @SerializedName("3")
     CancelPaymentError("3"),
-    @SerializedName("4")
-    ReceiveDataError("4"),
     @SerializedName("5")
-    PaybackError("5"),
+    ReceiveDataError("5"),
     @SerializedName("6")
-    SystemError("6")
+    PaybackError("6"),
+    @SerializedName("-1")
+    SystemError("-1"),
+    SdkWorkError("-2")
 }
