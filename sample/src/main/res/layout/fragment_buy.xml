@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <data>
+        <variable
+            name="viewmodel"
+            type="io.pikassa.sample.viewmodels.BuyViewModel" />
+        <import type="android.view.View" />
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".fragments.BuyFragment">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textviewEnterAmount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/textview_enter_amount"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_margin="@dimen/common_margin"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.3" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/editTextEnterAmount"
+            android:layout_width="300dp"
+            android:layout_margin="@dimen/common_margin"
+            android:layout_height="wrap_content"
+            android:autofillHints="adsfasdfa"
+            android:hint="@string/amount_placeholder"
+            android:inputType="numberDecimal"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textviewEnterAmount" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/common_margin"
+            android:maxLines="1"
+            android:text="@string/kilo"
+            app:layout_constraintBottom_toBottomOf="@+id/editTextEnterAmount"
+            app:layout_constraintLeft_toRightOf="@+id/editTextEnterAmount"
+            app:layout_constraintTop_toTopOf="@+id/editTextEnterAmount" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/button_buy"
+            android:onClick="@{() -> viewmodel.postBuy()}"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_margin="@dimen/common_margin"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editTextEnterAmount" />
+
+        <ProgressBar
+            android:id="@+id/progressBuy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:translationZ="50dp"
+            android:visibility="@{viewmodel.isLoading() ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
