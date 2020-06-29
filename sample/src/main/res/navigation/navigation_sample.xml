@@ -9,10 +9,22 @@
         android:label="BuyFragment" >
         <action
             android:id="@+id/gotoCardInfo"
-            app:destination="@id/bankCardFragment" />
+            app:destination="@id/bankCardFragment"
+            app:popUpTo="@id/buyFragment"
+            app:popUpToInclusive="false" />
     </fragment>
     <fragment
         android:id="@+id/bankCardFragment"
         android:name="io.pikassa.sample.fragments.BankCardFragment"
-        android:label="BankCardFragment" />
+        android:label="BankCardFragment" >
+        <action
+            android:id="@+id/goto_TransactionHistory"
+            app:destination="@id/transactionInfoFragment"
+            app:popUpTo="@id/bankCardFragment"
+            app:popUpToInclusive="false" />
+    </fragment>
+    <fragment
+        android:id="@+id/transactionInfoFragment"
+        android:name="io.pikassa.sample.fragments.TransactionInfoFragment"
+        android:label="TransactionInfoFragment" />
 </navigation>
