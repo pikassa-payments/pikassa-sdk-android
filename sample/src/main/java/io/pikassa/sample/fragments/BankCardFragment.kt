@@ -1,34 +1,45 @@
 package io.pikassa.sample.fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import io.pikassa.sample.R
+import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import io.pikassa.sample.databinding.FragmentBankCardBinding
-import io.pikassa.sample.viewmodels.CardInfoViewModel
+import io.pikassa.sample.ext.shortToast
+import io.pikassa.sample.viewmodels.BankCardViewModel
 
 
 class BankCardFragment : BaseFragment() {
+
+    private val viewModel: BankCardViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val viewModel: CardInfoViewModel by viewModels()
         val binding = FragmentBankCardBinding.inflate(inflater, container, false)
         binding.apply {
             lifecycleOwner = viewLifecycleOwner
             viewmodel = viewModel
         }
-        observeViewModel(viewModel)
+        observeViewModel()
         return binding.root
     }
 
-    private fun observeViewModel(viewModel: CardInfoViewModel) {
 
+    private fun observeViewModel() {
+        viewModel.requestReceived.observe(viewLifecycleOwner, Observer {
+            activity?.shortToast(it.toString())
+            val action = BankCardFragmentDirections.gotoTransactionHistory()
+            findNavController().navigate(action)
+        })
+
+        viewModel.errorReceived.observe(viewLifecycleOwner, Observer {
+            activity?.shortToast(it.toString())
+        })
     }
 
     companion object {

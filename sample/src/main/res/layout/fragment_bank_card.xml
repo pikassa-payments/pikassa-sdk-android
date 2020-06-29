@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
+
     <data>
+
         <variable
             name="viewmodel"
-            type="io.pikassa.sample.viewmodels.CardInfoViewModel" />
+            type="io.pikassa.sample.viewmodels.BankCardViewModel" />
+
         <import type="android.view.View" />
     </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
@@ -28,6 +32,7 @@
             android:layout_marginTop="@dimen/common_margin"
             android:layout_marginEnd="@dimen/card_margin"
             android:hint="@string/card_number"
+            android:text="@{viewmodel.cardNum}"
             app:layout_constraintLeft_toLeftOf="@+id/textviewCardCredentials"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textviewCardCredentials" />
@@ -38,6 +43,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/card_margin"
             android:hint="@string/edittext_cardHolder"
+            android:text="@{viewmodel.holder}"
             app:layout_constraintLeft_toLeftOf="@+id/textviewCardCredentials"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/edittextNumberCard" />
@@ -48,6 +54,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/card_margin"
             android:hint="@string/edittext_cvcCode"
+            android:text="@{viewmodel.cvc}"
             app:layout_constraintLeft_toLeftOf="@+id/textviewCardCredentials"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/edittextCardHolder" />
@@ -56,6 +63,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/common_margin"
+            android:onClick="@{() -> viewmodel.requestPayment()}"
             android:text="@string/button_buy"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
