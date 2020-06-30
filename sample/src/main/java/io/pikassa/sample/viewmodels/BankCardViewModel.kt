@@ -23,7 +23,7 @@ All rights received.
 class BankCardViewModel(application: Application) : AndroidViewModel(application) {
     companion object {
         // api key for payment request
-        private const val API_KEY: String = "be4d9881-4af5-4969-bac0-dfe8491a333a"
+        private const val API_KEY: String = "be4d9881-4af5-4969-bac0-dfe8491a333a" + "error"
         private const val TEST_UUID: String = "dd0425b1-8d47-4815-b68b-1fa7943c17e0"
     }
 

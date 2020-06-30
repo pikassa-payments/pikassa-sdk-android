@@ -38,7 +38,7 @@ class BuyViewModel(application: Application) : AndroidViewModel(application) {
         if(!fields.validate()) return
         isLoading.value = true
         coroutineScope.launch {
-            delay(3000L)
+            delay(500L)
             isLoading.postValue(false)
             paymentCreated.postValue(true)
         }

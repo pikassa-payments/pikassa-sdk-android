@@ -40,18 +40,21 @@ object Pikassa {
                 val response =
                     paymentRepository.requestPayment(uuid, apiKey, body)
                 withContext(Dispatchers.Main) {
-                    if(response.success) {
+                    if (response.success) {
                         response.data?.let { onSuccess(it) }
-                    }
-                    else {
+                    } else {
                         response.error?.let { onError(it) }
                     }
                 }
-            }
-            catch (ex: Exception) {
+            } catch (ex: Exception) {
                 // if we catch an error in working with request from sdk, call OnError and pass message in it
-                val error = ResponseError(PaymentErrorCode.SdkWorkError, "inner sdk exception: ${ex.localizedMessage}")
-                onError(error)
+                withContext(Dispatchers.Main) {
+                    val error = ResponseError(
+                        PaymentErrorCode.SdkWorkError,
+                        "inner sdk exception: ${ex.localizedMessage}"
+                    )
+                    onError(error)
+                }
             }
         }
     }
