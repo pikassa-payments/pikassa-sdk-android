@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import io.pikassa.sample.adapters.SimpleAdapter
 import io.pikassa.sample.databinding.FragmentTransactionInfoBinding
 import io.pikassa.sample.viewmodels.TransactionInfoViewModel
 
@@ -26,6 +27,9 @@ class TransactionInfoFragment: BaseFragment() {
             lifecycleOwner = viewLifecycleOwner
             viewModel = viewmodel
         }
+
+        binding.recyclerviewHistory.adapter = SimpleAdapter(listOf())
+
         return binding.root
     }
 }

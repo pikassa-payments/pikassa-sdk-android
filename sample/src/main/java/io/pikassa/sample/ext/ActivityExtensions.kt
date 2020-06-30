@@ -1,6 +1,9 @@
 package io.pikassa.sample.ext
 
 import android.app.Activity
+import android.content.Context
+import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 
 /**
@@ -14,4 +17,8 @@ fun Activity.shortToast(message: String) {
 
 fun Activity.longToast(message: String) {
     Toast.makeText(this, message, Toast.LENGTH_LONG).show()
+}
+
+fun Activity.hideKeyboard() {
+    hideKeyboard(currentFocus ?: View(this))
 }

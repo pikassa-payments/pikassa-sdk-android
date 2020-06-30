@@ -44,6 +44,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/common_margin"
                 android:hint="@string/amount_placeholder"
+                android:singleLine="true"
                 android:text="@={viewmodel.amountField.data.ld}"
                 android:inputType="numberDecimal"
                 android:autofillHints="@string/amount_placeholder" />

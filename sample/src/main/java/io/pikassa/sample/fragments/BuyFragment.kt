@@ -10,6 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import io.pikassa.sample.R
 import io.pikassa.sample.databinding.FragmentBuyBinding
+import io.pikassa.sample.ext.hideKeyboard
 import io.pikassa.sample.viewmodels.BuyViewModel
 
 
@@ -33,6 +34,7 @@ class BuyFragment : BaseFragment() {
 
     private fun observeViewModel(viewModel: BuyViewModel) {
         viewModel.paymentCreated.observe(viewLifecycleOwner, Observer {
+            hideKeyboard()
             val action = BuyFragmentDirections.gotoCardInfo()
             findNavController().navigate(action)
         })

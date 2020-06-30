@@ -1,9 +1,7 @@
 package io.pikassa.sample.viewmodels
 
 import android.app.Application
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.ViewModel
 import dev.icerock.moko.fields.FormField
 import dev.icerock.moko.fields.liveBlock
 import dev.icerock.moko.fields.validate
@@ -50,6 +48,22 @@ class BankCardViewModel(application: Application) : AndroidViewModel(application
             else null
         })
 
+    val expYearField = FormField<String, StringDesc>(
+        application.resources.getString(R.string.test_exp_year),
+        liveBlock { expYear ->
+            if (expYear.isBlank() || expYear.length != application.resources.getInteger(R.integer.exp_year_amount))
+                application.resources.getString(R.string.error_invalid_amount_of_numbers).desc()
+            else null
+        })
+
+    val expMonthField = FormField<String, StringDesc>(
+        application.resources.getString(R.string.test_exp_month),
+        liveBlock { expYear ->
+            if (expYear.isBlank() || expYear.length != application.resources.getInteger(R.integer.exp_month_amount))
+                application.resources.getString(R.string.error_invalid_amount_of_numbers).desc()
+            else null
+        })
+
     val cvcField = FormField<String, StringDesc>(
         application.resources.getString(R.string.test_cvc),
         liveBlock { cvc ->
@@ -59,7 +73,7 @@ class BankCardViewModel(application: Application) : AndroidViewModel(application
                 null
         })
 
-    private val fields = listOf(panField, holderField, cvcField)
+    private val fields = listOf(panField, holderField, cvcField, expYearField, expMonthField)
 
     fun requestPayment() {
         if (!fields.validate()) return
@@ -71,7 +85,14 @@ class BankCardViewModel(application: Application) : AndroidViewModel(application
             TEST_UUID,
             requestId,
             PaymentMethod.BANK_CARD,
-            CardDetails(panField.value(), holderField.value(), cvcField.value(), null),
+            CardDetails(
+                panField.value(),
+                holderField.value(),
+                expYearField.value(),
+                expMonthField.value(),
+                cvcField.value(),
+                null
+            ),
             onSuccess = {
                 isLoading.value = false
                 requestReceived.value = it

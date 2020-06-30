@@ -8,6 +8,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import io.pikassa.sample.databinding.FragmentBankCardBinding
+import io.pikassa.sample.ext.hideKeyboard
 import io.pikassa.sample.ext.shortToast
 import io.pikassa.sample.viewmodels.BankCardViewModel
 
@@ -32,12 +33,14 @@ class BankCardFragment : BaseFragment() {
 
     private fun observeViewModel() {
         viewModel.requestReceived.observe(viewLifecycleOwner, Observer {
+            hideKeyboard()
             activity?.shortToast(it.toString())
             val action = BankCardFragmentDirections.gotoTransactionHistory()
             findNavController().navigate(action)
         })
 
         viewModel.errorReceived.observe(viewLifecycleOwner, Observer {
+            hideKeyboard()
             activity?.shortToast(it.toString())
         })
     }

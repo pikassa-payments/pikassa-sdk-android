@@ -26,63 +26,113 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.textfield.TextInputLayout
-            app:error="@{viewmodel.panField.error.ld()}"
             android:id="@+id/TextInputEnterPan"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/common_margin"
             android:layout_marginTop="@dimen/common_margin"
             android:layout_marginEnd="@dimen/card_margin"
+            app:error="@{viewmodel.panField.error.ld()}"
             app:layout_constraintLeft_toLeftOf="@+id/textviewCardCredentials"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textviewCardCredentials">
+
             <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/edittextNumberCard"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/card_margin"
                 android:hint="@string/card_number"
-                android:text="@={viewmodel.panField.data.ld()}"/>
+                android:singleLine="true"
+                android:text="@={viewmodel.panField.data.ld()}" />
         </com.google.android.material.textfield.TextInputLayout>
 
 
         <com.google.android.material.textfield.TextInputLayout
-            app:error="@{viewmodel.holderField.error.ld()}"
             android:id="@+id/TextInputEnterHolder"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/common_margin"
             android:layout_marginTop="@dimen/common_margin"
             android:layout_marginEnd="@dimen/card_margin"
+            app:error="@{viewmodel.holderField.error.ld()}"
             app:layout_constraintLeft_toLeftOf="@+id/textviewCardCredentials"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/TextInputEnterPan" >
+            app:layout_constraintTop_toBottomOf="@+id/TextInputEnterPan">
+
             <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/edittextCardHolder"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/card_margin"
                 android:hint="@string/edittext_cardHolder"
+                android:singleLine="true"
                 android:text="@={viewmodel.holderField.data.ld()}" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            app:error="@{viewmodel.cvcField.error.ld()}"
+            android:id="@+id/TextInputEnterExpYear"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/common_margin"
+            android:layout_marginTop="@dimen/common_margin"
+            android:layout_marginEnd="@dimen/card_margin"
+            app:error="@{viewmodel.expYearField.error.ld()}"
+            app:layout_constraintLeft_toLeftOf="@+id/textviewCardCredentials"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/TextInputEnterHolder">
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/edittextExpYear"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/card_margin"
+                android:hint="@string/exp_year"
+                android:singleLine="true"
+                android:text="@={viewmodel.expYearField.data.ld()}" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/TextInputEnterExpMonth"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/common_margin"
+            android:layout_marginTop="@dimen/common_margin"
+            android:layout_marginEnd="@dimen/card_margin"
+            app:error="@{viewmodel.expMonthField.error.ld()}"
+            app:layout_constraintLeft_toLeftOf="@+id/textviewCardCredentials"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/TextInputEnterExpYear">
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/edittextExpMonth"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/card_margin"
+                android:hint="@string/exp_month"
+                android:singleLine="true"
+                android:text="@={viewmodel.expMonthField.data.ld()}" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/TextInputEnterCvc"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/common_margin"
             android:layout_marginTop="@dimen/common_margin"
             android:layout_marginEnd="@dimen/card_margin"
+            app:error="@{viewmodel.cvcField.error.ld()}"
             app:layout_constraintLeft_toLeftOf="@+id/textviewCardCredentials"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/TextInputEnterHolder">
+            app:layout_constraintTop_toBottomOf="@+id/TextInputEnterExpMonth">
+
             <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/edittextCvcCode"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/card_margin"
                 android:hint="@string/edittext_cvcCode"
+                android:singleLine="true"
                 android:text="@={viewmodel.cvcField.data.ld()}" />
         </com.google.android.material.textfield.TextInputLayout>
 
