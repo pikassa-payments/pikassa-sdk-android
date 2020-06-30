@@ -1,6 +1,15 @@
 package io.pikassa.sample.viewmodels
 
+import android.app.Application
+import androidx.core.content.ContextCompat
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.ViewModel
+import dev.icerock.moko.fields.FormField
+import dev.icerock.moko.fields.liveBlock
+import dev.icerock.moko.fields.validate
+import dev.icerock.moko.resources.desc.StringDesc
+import dev.icerock.moko.resources.desc.desc
+import io.pikassa.sample.R
 import io.pikassa.sample.utils.SingleLiveEvent
 import io.pikassa.sdk.Pikassa
 import io.pikassa.sdk.entities.CardDetails
@@ -13,31 +22,56 @@ import java.util.*
 Created by Denis Chornyy on 29,Июнь,2020
 All rights received.
  */
-class BankCardViewModel : ViewModel() {
+class BankCardViewModel(application: Application) : AndroidViewModel(application) {
     companion object {
         // api key for payment request
-        private const val apiKey: String = "be4d9881-4af5-4969-bac0-dfe8491a333a"
-        private const val testUUID: String = "dd0425b1-8d47-4815-b68b-1fa7943c17e0"
-
+        private const val API_KEY: String = "be4d9881-4af5-4969-bac0-dfe8491a333a"
+        private const val TEST_UUID: String = "dd0425b1-8d47-4815-b68b-1fa7943c17e0"
     }
-
-    var cardNum: String = "4111111111111111"
-    var holder: String = "ivan ivanov"
-    var cvc: String = "123"
 
     var isLoading = SingleLiveEvent<Boolean>()
     var errorReceived = SingleLiveEvent<ResponseError>()
     var requestReceived = SingleLiveEvent<ResponseData>()
 
+    val panField = FormField<String, StringDesc>(
+        application.resources.getString(R.string.test_pan),
+        liveBlock { pan ->
+            if (pan.isBlank() || pan.length != application.resources.getInteger(R.integer.pan_amount))
+                application.getString(R.string.error_invalid_amount_of_numbers).desc()
+            else
+                null
+        })
+
+    val holderField = FormField<String, StringDesc>(
+        application.resources.getString(R.string.test_holder),
+        liveBlock { holder ->
+            if (holder.isBlank())
+                application.getString(R.string.field_empty_error).desc()
+            else null
+        })
+
+    val cvcField = FormField<String, StringDesc>(
+        application.resources.getString(R.string.test_cvc),
+        liveBlock { cvc ->
+            if (cvc.isBlank() || cvc.length != application.resources.getInteger(R.integer.cvc_amount))
+                application.getString(R.string.error_invalid_amount_of_numbers).desc()
+            else
+                null
+        })
+
+    private val fields = listOf(panField, holderField, cvcField)
+
     fun requestPayment() {
+        if (!fields.validate()) return
+
         isLoading.value = true
         val requestId = UUID.randomUUID().toString()
-        Pikassa.init(apiKey)
+        Pikassa.init(API_KEY)
         Pikassa.sendCardData(
-            testUUID,
+            TEST_UUID,
             requestId,
             PaymentMethod.BANK_CARD,
-            CardDetails(cardNum, holder, cvc, null),
+            CardDetails(panField.value(), holderField.value(), cvcField.value(), null),
             onSuccess = {
                 isLoading.value = false
                 requestReceived.value = it

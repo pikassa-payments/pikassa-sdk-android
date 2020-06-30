@@ -25,39 +25,66 @@
 
             app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/edittextNumberCard"
+        <com.google.android.material.textfield.TextInputLayout
+            app:error="@{viewmodel.panField.error.ld()}"
+            android:id="@+id/TextInputEnterPan"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_margin="@dimen/common_margin"
             android:layout_marginTop="@dimen/common_margin"
             android:layout_marginEnd="@dimen/card_margin"
-            android:hint="@string/card_number"
-            android:text="@{viewmodel.cardNum}"
             app:layout_constraintLeft_toLeftOf="@+id/textviewCardCredentials"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textviewCardCredentials" />
+            app:layout_constraintTop_toBottomOf="@+id/textviewCardCredentials">
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/edittextNumberCard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/card_margin"
+                android:hint="@string/card_number"
+                android:text="@={viewmodel.panField.data.ld()}"/>
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/edittextCardHolder"
+
+        <com.google.android.material.textfield.TextInputLayout
+            app:error="@{viewmodel.holderField.error.ld()}"
+            android:id="@+id/TextInputEnterHolder"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_margin="@dimen/common_margin"
+            android:layout_marginTop="@dimen/common_margin"
             android:layout_marginEnd="@dimen/card_margin"
-            android:hint="@string/edittext_cardHolder"
-            android:text="@{viewmodel.holder}"
             app:layout_constraintLeft_toLeftOf="@+id/textviewCardCredentials"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/edittextNumberCard" />
+            app:layout_constraintTop_toBottomOf="@+id/TextInputEnterPan" >
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/edittextCardHolder"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/card_margin"
+                android:hint="@string/edittext_cardHolder"
+                android:text="@={viewmodel.holderField.data.ld()}" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/edittextCvcCode"
+        <com.google.android.material.textfield.TextInputLayout
+            app:error="@{viewmodel.cvcField.error.ld()}"
+            android:id="@+id/TextInputEnterCvc"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_margin="@dimen/common_margin"
+            android:layout_marginTop="@dimen/common_margin"
             android:layout_marginEnd="@dimen/card_margin"
-            android:hint="@string/edittext_cvcCode"
-            android:text="@{viewmodel.cvc}"
             app:layout_constraintLeft_toLeftOf="@+id/textviewCardCredentials"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/edittextCardHolder" />
+            app:layout_constraintTop_toBottomOf="@+id/TextInputEnterHolder">
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/edittextCvcCode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/card_margin"
+                android:hint="@string/edittext_cvcCode"
+                android:text="@={viewmodel.cvcField.data.ld()}" />
+        </com.google.android.material.textfield.TextInputLayout>
 
         <androidx.appcompat.widget.AppCompatButton
             android:layout_width="wrap_content"
@@ -67,7 +94,7 @@
             android:text="@string/button_buy"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/edittextCvcCode" />
+            app:layout_constraintTop_toBottomOf="@+id/TextInputEnterCvc" />
 
         <ProgressBar
             android:id="@+id/progressBuy"
