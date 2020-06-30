@@ -5,7 +5,6 @@ import io.pikassa.sdk.entities.PaymentMethod
 import io.pikassa.sdk.entities.ResponseData
 import io.pikassa.sdk.entities.ResponseError
 import org.junit.Test
-import java.util.*
 
 /**
 Created by Denis Chornyy on 26,Июнь,2020
@@ -13,16 +12,18 @@ All rights received.
  */
 class PikassaTest {
     @Test
-    fun baseTest() {
+    fun testWithoutRedirect() {
         Pikassa.init("be4d9881-4af5-4969-bac0-dfe8491a333a")
-        val uuid = "dd0425b1-8d47-4815-b68b-1fa7943c17e0"
-        val requestId = UUID.randomUUID().toString()
+        val uuid = "e334d16e-d2d2-41a1-9076-5301703ee74e"
+        val requestId = "40271fda28304550b2db2090ed5c3424"
         val paymentMethod = PaymentMethod.BANK_CARD
         val pan = "4111111111111111"
         val cardHolder = "ivan ivanov"
+        val expYear = "19"
+        val expMonth = "12"
         val cvc = "123"
         val someParam = mapOf(Pair("key1", "value1"), Pair("key2", 5))
-        val details = CardDetails(pan, cardHolder, cvc, someParam)
+        val details = CardDetails(pan, cardHolder, expYear, expMonth, cvc, someParam)
 
         try {
             Pikassa.sendCardData(
@@ -30,6 +31,7 @@ class PikassaTest {
                 requestId,
                 paymentMethod,
                 details, onSuccess = {
+
                     showSuccessOutput(it)
                 }, onError = {
                     showErrorOutput(it)

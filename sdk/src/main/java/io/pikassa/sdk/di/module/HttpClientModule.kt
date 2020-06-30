@@ -13,14 +13,13 @@ All rights received.
 class HttpClientModule {
     @Provides
     fun provideHttpClientModule(headers: List<Pair<String, String>>): OkHttpClient.Builder {
-        val httpClient = OkHttpClient.Builder()
-        httpClient.addInterceptor {
-            val request = it.request().newBuilder()
-            for (pair in headers) {
-                request.header(pair.first, pair.second)
+        return OkHttpClient.Builder()
+            .addInterceptor {
+                val request = it.request().newBuilder()
+                for (pair in headers) {
+                    request.header(pair.first, pair.second)
+                }
+                it.proceed(request.build())
             }
-            it.proceed(request.build())
-        }
-        return httpClient
     }
 }

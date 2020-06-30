@@ -15,6 +15,8 @@ All rights received.
 data class CardDetails(
     val pan: String,
     val cardHolder: String,
+    val expYear: String,
+    val expMonth: String,
     val cvc: String,
     val someParam: Map<String, Any>?
 )
