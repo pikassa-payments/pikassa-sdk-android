@@ -15,6 +15,6 @@ data class ResponseError(
     val message: String
 ) {
     override fun toString(): String {
-        return "error code: ${code.toString()}\nerror message: $message"
+        return "error code: ${code.getDescription()}\nerror message: $message"
     }
 }
