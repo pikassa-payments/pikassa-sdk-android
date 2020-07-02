@@ -11,10 +11,11 @@ import androidx.navigation.fragment.findNavController
 import io.pikassa.sample.R
 import io.pikassa.sample.databinding.FragmentBuyBinding
 import io.pikassa.sample.ext.hideKeyboard
+import io.pikassa.sample.ext.shortToast
 import io.pikassa.sample.viewmodels.BuyViewModel
 
 
-class BuyFragment : BaseFragment() {
+class BuyFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,6 +39,7 @@ class BuyFragment : BaseFragment() {
             val action = BuyFragmentDirections.gotoCardInfo()
             findNavController().navigate(action)
         })
+        viewModel.noInternet.observe(viewLifecycleOwner, Observer { activity?.shortToast(getString(R.string.no_internet)) })
     }
 
     companion object {

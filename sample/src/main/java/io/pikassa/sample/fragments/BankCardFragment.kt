@@ -4,16 +4,18 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import io.pikassa.sample.R
 import io.pikassa.sample.databinding.FragmentBankCardBinding
 import io.pikassa.sample.ext.hideKeyboard
 import io.pikassa.sample.ext.shortToast
 import io.pikassa.sample.viewmodels.BankCardViewModel
 
 
-class BankCardFragment : BaseFragment() {
+class BankCardFragment : Fragment() {
 
     private val viewModel: BankCardViewModel by viewModels()
 
@@ -43,6 +45,7 @@ class BankCardFragment : BaseFragment() {
             hideKeyboard()
             activity?.shortToast(it.toString())
         })
+        viewModel.noInternet.observe(viewLifecycleOwner, Observer { activity?.shortToast(getString(R.string.no_internet)) })
     }
 
     companion object {

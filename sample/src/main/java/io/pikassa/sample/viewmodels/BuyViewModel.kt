@@ -8,6 +8,7 @@ import dev.icerock.moko.fields.validate
 import dev.icerock.moko.resources.desc.StringDesc
 import dev.icerock.moko.resources.desc.desc
 import io.pikassa.sample.R
+import io.pikassa.sample.utils.InternetUtil
 import io.pikassa.sample.utils.SingleLiveEvent
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -18,7 +19,7 @@ import kotlinx.coroutines.launch
 Created by Denis Chornyy on 26,Июнь,2020
 All rights received.
  */
-class BuyViewModel(application: Application) : AndroidViewModel(application) {
+class BuyViewModel(application: Application) : BaseViewModel(application) {
     // loading data
     var isLoading = SingleLiveEvent<Boolean>()
     var paymentCreated = SingleLiveEvent<Boolean>()
@@ -36,6 +37,7 @@ class BuyViewModel(application: Application) : AndroidViewModel(application) {
 
     fun postBuy() {
         if(!fields.validate()) return
+        if(!checkInternet()) return
         isLoading.value = true
         coroutineScope.launch {
             delay(500L)

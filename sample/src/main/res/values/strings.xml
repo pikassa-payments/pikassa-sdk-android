@@ -25,4 +25,5 @@
     <string name="test_cvc">123</string>
     <string name="test_exp_year">24</string>
     <string name="test_exp_month">12</string>
+    <string name="no_internet">No Internet Connection! Please check it.</string>
 </resources>
