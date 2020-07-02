@@ -37,26 +37,27 @@ object Pikassa {
         onError: (ResponseError) -> Unit
     ) {
         val body = BodyRequest(requestId, paymentMethod, details)
-        //CoroutineScope(Dispatchers.IO).launch {
-        runBlocking {
+        CoroutineScope(Dispatchers.IO).launch {
             try {
                 val response =
                     paymentRepository.requestPayment(uuid, apiKey, body)
-                //withContext(Dispatchers.Main) {
+                withContext(Dispatchers.Main) {
                     if(response.success) {
                         response.data?.let { onSuccess(it) }
                     }
                     else {
                         response.error?.let { onError(it) }
                     }
-                //}
+                }
             }
             catch (ex: Exception) {
                 // if we catch an error in working with request from sdk, call OnError and pass message in it
-                var error = ex.getApiError()
-                if(error == null)
-                    error = ResponseError(PaymentErrorCode.SdkWorkError, "inner sdk exception: ${ex.localizedMessage}")
-                onError(error)
+                withContext(Dispatchers.Main) {
+                    var error = ex.getApiError()
+                    if(error == null)
+                        error = ResponseError(PaymentErrorCode.SdkWorkError, "inner sdk exception: ${ex.localizedMessage}")
+                    onError(error)
+                }
             }
         }
     }
