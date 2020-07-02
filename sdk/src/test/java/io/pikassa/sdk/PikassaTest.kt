@@ -14,7 +14,7 @@ class PikassaTest {
     @Test
     fun testWithoutRedirect() {
         Pikassa.init("be4d9881-4af5-4969-bac0-dfe8491a333a")
-        val uuid = "e334d16e-d2d2-41a1-9076-5301703ee74e"
+        val uuid = "f7b22418-6c1e-45bb-b8a7-d1ef7b5f5c601"
         val requestId = "40271fda28304550b2db2090ed5c3424"
         val paymentMethod = PaymentMethod.BANK_CARD
         val pan = "4111111111111111"
