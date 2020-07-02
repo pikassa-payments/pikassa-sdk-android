@@ -1,6 +1,8 @@
 package io.pikassa.sdk
 
+import com.google.gson.Gson
 import io.pikassa.sdk.entities.*
+import io.pikassa.sdk.ext.getApiError
 import io.pikassa.sdk.helpers.PaymentHelper
 import io.pikassa.sdk.repositories.PaymentRepository
 import kotlinx.coroutines.*
@@ -40,19 +42,20 @@ object Pikassa {
                 val response =
                     paymentRepository.requestPayment(uuid, apiKey, body)
                 withContext(Dispatchers.Main) {
-                    if (response.success) {
+                    if(response.success) {
                         response.data?.let { onSuccess(it) }
-                    } else {
+                    }
+                    else {
                         response.error?.let { onError(it) }
                     }
                 }
-            } catch (ex: Exception) {
+            }
+            catch (ex: Exception) {
                 // if we catch an error in working with request from sdk, call OnError and pass message in it
                 withContext(Dispatchers.Main) {
-                    val error = ResponseError(
-                        PaymentErrorCode.SdkWorkError,
-                        "inner sdk exception: ${ex.localizedMessage}"
-                    )
+                    var error = ex.getApiError()
+                    if(error == null)
+                        error = ResponseError(PaymentErrorCode.SdkWorkError, "inner sdk exception: ${ex.localizedMessage}")
                     onError(error)
                 }
             }
