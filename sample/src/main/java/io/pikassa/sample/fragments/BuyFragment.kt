@@ -36,9 +36,10 @@ class BuyFragment : Fragment() {
     private fun observeViewModel(viewModel: BuyViewModel) {
         viewModel.paymentCreated.observe(viewLifecycleOwner, Observer {
             hideKeyboard()
-            val action = BuyFragmentDirections.gotoCardInfo()
+            val action = BuyFragmentDirections.gotoCardInfo(it.invoiceUuid, it.uuid)
             findNavController().navigate(action)
         })
+        viewModel.isError.observe(viewLifecycleOwner, Observer { activity?.shortToast(it.toString()) })
         viewModel.noInternet.observe(viewLifecycleOwner, Observer { activity?.shortToast(getString(R.string.no_internet)) })
     }
 

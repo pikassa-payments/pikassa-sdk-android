@@ -1,14 +1,12 @@
 package io.pikassa.sample.viewmodels
 
 import android.app.Application
-import androidx.lifecycle.AndroidViewModel
 import dev.icerock.moko.fields.FormField
 import dev.icerock.moko.fields.liveBlock
 import dev.icerock.moko.fields.validate
 import dev.icerock.moko.resources.desc.StringDesc
 import dev.icerock.moko.resources.desc.desc
 import io.pikassa.sample.R
-import io.pikassa.sample.utils.InternetUtil
 import io.pikassa.sample.utils.SingleLiveEvent
 import io.pikassa.sdk.Pikassa
 import io.pikassa.sdk.entities.CardDetails
@@ -21,11 +19,10 @@ import java.util.*
 Created by Denis Chornyy on 29,Июнь,2020
 All rights received.
  */
-class BankCardViewModel(application: Application) : BaseViewModel(application) {
+class BankCardViewModel(application: Application, private val uuid: String) : BaseViewModel(application) {
     companion object {
         // api key for payment request
         private const val API_KEY: String = "be4d9881-4af5-4969-bac0-dfe8491a333a"
-        private const val TEST_UUID: String = "f7b22418-6c1e-45bb-b8a7-d1ef7b5f5c601"
     }
 
     var isLoading = SingleLiveEvent<Boolean>()
@@ -84,7 +81,7 @@ class BankCardViewModel(application: Application) : BaseViewModel(application) {
         val requestId = UUID.randomUUID().toString()
         Pikassa.init(API_KEY)
         Pikassa.sendCardData(
-            TEST_UUID,
+            uuid,
             requestId,
             PaymentMethod.BANK_CARD,
             CardDetails(

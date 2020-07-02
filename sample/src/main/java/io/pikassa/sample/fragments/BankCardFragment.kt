@@ -8,16 +8,21 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import io.pikassa.sample.R
 import io.pikassa.sample.databinding.FragmentBankCardBinding
 import io.pikassa.sample.ext.hideKeyboard
 import io.pikassa.sample.ext.shortToast
 import io.pikassa.sample.viewmodels.BankCardViewModel
+import io.pikassa.sample.viewmodels.OrderViewModelFactory
 
 
 class BankCardFragment : Fragment() {
 
-    private val viewModel: BankCardViewModel by viewModels()
+    private val args: BankCardFragmentArgs by navArgs()
+    private val viewModel: BankCardViewModel by viewModels {
+        OrderViewModelFactory(requireActivity().application, args.invoiceUuid)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,16 +41,23 @@ class BankCardFragment : Fragment() {
     private fun observeViewModel() {
         viewModel.requestReceived.observe(viewLifecycleOwner, Observer {
             hideKeyboard()
-            activity?.shortToast(it.toString())
-            val action = BankCardFragmentDirections.gotoTransactionHistory()
-            findNavController().navigate(action)
+            //activity?.shortToast(it.toString())
+            if (it.redirect != null) {
+                val action = BankCardFragmentDirections.actionBankCardFragmentToWebViewFragment(it.redirect!!.url, args.uuid)
+                findNavController().navigate(action)
+            } else {
+                val action = BankCardFragmentDirections.gotoTransactionHistory(args.uuid)
+                findNavController().navigate(action)
+            }
         })
 
         viewModel.errorReceived.observe(viewLifecycleOwner, Observer {
             hideKeyboard()
             activity?.shortToast(it.toString())
         })
-        viewModel.noInternet.observe(viewLifecycleOwner, Observer { activity?.shortToast(getString(R.string.no_internet)) })
+        viewModel.noInternet.observe(
+            viewLifecycleOwner,
+            Observer { activity?.shortToast(getString(R.string.no_internet)) })
     }
 
     companion object {
