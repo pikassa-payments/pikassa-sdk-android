@@ -1,12 +1,10 @@
 package io.pikassa.sdk
 
-import com.google.gson.Gson
 import io.pikassa.sdk.entities.*
 import io.pikassa.sdk.ext.getApiError
 import io.pikassa.sdk.helpers.PaymentHelper
 import io.pikassa.sdk.repositories.PaymentRepository
 import kotlinx.coroutines.*
-import java.lang.Exception
 
 /**
 Created by Denis Chornyy on 26,Июнь,2020
@@ -17,13 +15,14 @@ All rights received.
  */
 object Pikassa {
 
+
+    private lateinit var job: Job
+
     // variable for apiKey
     private lateinit var apiKey: String
 
     // working with payments
     private lateinit var paymentRepository: PaymentRepository
-
-    private val coroutineScope = CoroutineScope(Dispatchers.IO)
 
     fun init(apiKey: String) {
         this.apiKey = apiKey
@@ -39,7 +38,7 @@ object Pikassa {
         onError: (ResponseError) -> Unit
     ) {
         val body = BodyRequest(requestId, paymentMethod, details)
-        coroutineScope.launch {
+        job = CoroutineScope(Dispatchers.IO).launch {
             try {
                 val response =
                     paymentRepository.requestPayment(uuid, apiKey, body)
@@ -68,6 +67,6 @@ object Pikassa {
      * method for closing coroutines to prevent io exceptions
      */
     fun close() {
-        coroutineScope.cancel()
+        job.cancel()
     }
 }
