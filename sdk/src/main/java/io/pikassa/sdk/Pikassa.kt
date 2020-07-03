@@ -23,6 +23,8 @@ object Pikassa {
     // working with payments
     private lateinit var paymentRepository: PaymentRepository
 
+    private val coroutineScope = CoroutineScope(Dispatchers.IO)
+
     fun init(apiKey: String) {
         this.apiKey = apiKey
         paymentRepository = PaymentRepository(PaymentHelper())
@@ -37,7 +39,7 @@ object Pikassa {
         onError: (ResponseError) -> Unit
     ) {
         val body = BodyRequest(requestId, paymentMethod, details)
-        CoroutineScope(Dispatchers.IO).launch {
+        coroutineScope.launch {
             try {
                 val response =
                     paymentRepository.requestPayment(uuid, apiKey, body)
@@ -60,5 +62,12 @@ object Pikassa {
                 }
             }
         }
+    }
+
+    /**
+     * method for closing coroutines to prevent io exceptions
+     */
+    fun close() {
+        coroutineScope.cancel()
     }
 }
