@@ -102,4 +102,9 @@ class BankCardViewModel(application: Application, private val uuid: String) : Ba
             }
         )
     }
+
+    override fun onCleared() {
+        super.onCleared()
+        Pikassa.close()
+    }
 }

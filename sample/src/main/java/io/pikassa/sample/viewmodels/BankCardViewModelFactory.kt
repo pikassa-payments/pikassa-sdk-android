@@ -8,6 +8,6 @@ import androidx.lifecycle.ViewModelProvider
 Created by Denis Chornyy on 02,Июль,2020
 All rights received.
  */
-class OrderViewModelFactory(private val application: Application, private val myExtraParam: String): ViewModelProvider.NewInstanceFactory() {
+class BankCardViewModelFactory(private val application: Application, private val myExtraParam: String): ViewModelProvider.NewInstanceFactory() {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T = BankCardViewModel(application, myExtraParam) as T
 }

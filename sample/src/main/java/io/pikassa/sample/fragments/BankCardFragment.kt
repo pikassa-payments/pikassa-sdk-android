@@ -14,14 +14,14 @@ import io.pikassa.sample.databinding.FragmentBankCardBinding
 import io.pikassa.sample.ext.hideKeyboard
 import io.pikassa.sample.ext.shortToast
 import io.pikassa.sample.viewmodels.BankCardViewModel
-import io.pikassa.sample.viewmodels.OrderViewModelFactory
+import io.pikassa.sample.viewmodels.BankCardViewModelFactory
 
 
 class BankCardFragment : Fragment() {
 
     private val args: BankCardFragmentArgs by navArgs()
     private val viewModel: BankCardViewModel by viewModels {
-        OrderViewModelFactory(requireActivity().application, args.invoiceUuid)
+        BankCardViewModelFactory(requireActivity().application, args.invoiceUuid)
     }
 
     override fun onCreateView(

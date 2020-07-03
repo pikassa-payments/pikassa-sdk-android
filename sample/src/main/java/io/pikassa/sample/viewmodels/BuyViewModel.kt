@@ -15,6 +15,7 @@ import io.pikassa.sample.repository.OrdersRepository
 import io.pikassa.sample.utils.SingleLiveEvent
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
 
 /**
@@ -58,5 +59,10 @@ class BuyViewModel(application: Application) : BaseViewModel(application) {
                 isError.postValue(response.error)
             }
         }
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        coroutineScope.cancel()
     }
 }
