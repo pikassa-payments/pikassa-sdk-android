@@ -62,7 +62,7 @@ class OrderNetworkHelper {
             var parsedErr = ex.getError()
             if (parsedErr == null)
                 parsedErr = OrderError("-1", "something went wrong: ${ex.localizedMessage}", null)
-            Response<OrderHistoryData, OrderError>(false, data = null, error = parsedErr)
+            Response(false, data = null, error = parsedErr)
         }
     }
 }

@@ -16,6 +16,11 @@
     <string name="edittext_cvcCode">Cvc код (с обратной стороны карты):</string>
     <string name="textview_TransactionInfo">Информация по транзакции:</string>
 
+    <string name="invoice_uuid">invoice UUID:</string>
+    <string name="amount">amount:</string>
+    <string name="status">status:</string>
+    <string name="update_time">update time:</string>
+
 
     <string name="amount_error">Не должно быть пустым или слишком большим!</string>
     <string name="error_invalid_amount_of_numbers">Неверное количество введенных символов!</string>
