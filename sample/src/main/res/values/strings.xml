@@ -1,10 +1,10 @@
 <resources>
     <string name="app_name">Pikassa sample</string>
     <string name="payment_url_link">https://pikassa.io/</string>
-    <string name="textview_enter_amount">Введите количество кг для покупки:</string>
-    <string name="kilo">КГ</string>
+    <string name="textview_enter_amount">Введите количество для покупки:</string>
+    <string name="kilo">ШТ</string>
     <string name="button_buy">Купить</string>
-    <string name="amount_placeholder">Количество кг товара</string>
+    <string name="amount_placeholder">Количество товаров (шт)</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="card_info">card info</string>

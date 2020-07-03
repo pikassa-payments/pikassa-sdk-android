@@ -46,9 +46,9 @@ class BuyViewModel(application: Application) : BaseViewModel(application) {
         coroutineScope.launch {
             val ordersRepository = OrdersRepository(OrderNetworkHelper())
 
-            val testItems = listOf(Item(1, 2), Item(2, 6))
-            val testEmail = "test@test.ru"
-            val testPhone = "88005553535"
+            val testItems = listOf(Item(1, amountField.value().toInt()))
+            val testEmail = "mail@example.com"
+            val testPhone =  "+79991234567"
 
             val response = ordersRepository.makeOrder(testItems, testPhone, testEmail)
             isLoading.postValue(false)
