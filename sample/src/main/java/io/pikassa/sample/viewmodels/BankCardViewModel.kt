@@ -16,10 +16,11 @@ import io.pikassa.sdk.entities.ResponseError
 import java.util.*
 
 /**
-Created by Denis Chornyy on 29,Июнь,2020
+Created by pikassa, support@pikassa.io on 29,Июнь,2020
 All rights received.
  */
-class BankCardViewModel(application: Application, private val uuid: String) : BaseViewModel(application) {
+class BankCardViewModel(application: Application, private val uuid: String) :
+    BaseViewModel(application) {
     companion object {
         // api key for payment request
         private const val API_KEY: String = "be4d9881-4af5-4969-bac0-dfe8491a333a"
@@ -75,7 +76,7 @@ class BankCardViewModel(application: Application, private val uuid: String) : Ba
 
     fun requestPayment() {
         if (!fields.validate()) return
-        if(!checkInternet()) return
+        if (!checkInternet()) return
 
         isLoading.value = true
         val requestId = UUID.randomUUID().toString()

@@ -4,7 +4,7 @@ import dagger.Module
 import dagger.Provides
 
 /**
-Created by Denis Chornyy on 26,Июнь,2020
+Created by pikassa, support@pikassa.io on 26,Июнь,2020
 All rights received.
  */
 

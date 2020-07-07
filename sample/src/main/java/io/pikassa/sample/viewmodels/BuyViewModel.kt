@@ -19,7 +19,7 @@ import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
 
 /**
-Created by Denis Chornyy on 26,Июнь,2020
+Created by pikassa, support@pikassa.io on 26,Июнь,2020
 All rights received.
  */
 class BuyViewModel(application: Application) : BaseViewModel(application) {
@@ -40,22 +40,21 @@ class BuyViewModel(application: Application) : BaseViewModel(application) {
 
 
     fun postBuy() {
-        if(!fields.validate()) return
-        if(!checkInternet()) return
+        if (!fields.validate()) return
+        if (!checkInternet()) return
         isLoading.value = true
         coroutineScope.launch {
             val ordersRepository = OrdersRepository(OrderNetworkHelper())
 
             val testItems = listOf(Item(1, amountField.value().toInt()))
             val testEmail = "mail@example.com"
-            val testPhone =  "+79991234567"
+            val testPhone = "+79991234567"
 
             val response = ordersRepository.makeOrder(testItems, testPhone, testEmail)
             isLoading.postValue(false)
-            if(response.success) {
+            if (response.success) {
                 paymentCreated.postValue(response.data)
-            }
-            else {
+            } else {
                 isError.postValue(response.error)
             }
         }

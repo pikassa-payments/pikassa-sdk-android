@@ -5,7 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 
 /**
-Created by Denis Chornyy on 03,Июль,2020
+Created by pikassa, support@pikassa.io on 03,Июль,2020
 All rights received.
  */
 

@@ -39,12 +39,12 @@ class BuyFragment : Fragment() {
             val action = BuyFragmentDirections.gotoCardInfo(it.invoiceUuid, it.uuid)
             findNavController().navigate(action)
         })
-        viewModel.isError.observe(viewLifecycleOwner, Observer { activity?.shortToast(it.toString()) })
-        viewModel.noInternet.observe(viewLifecycleOwner, Observer { activity?.shortToast(getString(R.string.no_internet)) })
+        viewModel.isError.observe(
+            viewLifecycleOwner,
+            Observer { activity?.shortToast(it.toString()) })
+        viewModel.noInternet.observe(
+            viewLifecycleOwner,
+            Observer { activity?.shortToast(getString(R.string.no_internet)) })
     }
 
-    companion object {
-        @JvmStatic
-        fun newInstance() = BuyFragment()
-    }
 }

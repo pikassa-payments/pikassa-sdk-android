@@ -15,7 +15,7 @@ import io.pikassa.sample.viewmodels.TransactionInfoViewModel
 import io.pikassa.sample.viewmodels.TransactionInfoViewModelFactory
 
 /**
-Created by Denis Chornyy on 29,Июнь,2020
+Created by pikassa, support@pikassa.io on 29,Июнь,2020
 All rights received.
  */
 class TransactionInfoFragment : Fragment() {

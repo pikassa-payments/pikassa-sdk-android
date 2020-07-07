@@ -12,7 +12,7 @@ import android.net.NetworkInfo
 import androidx.lifecycle.LiveData
 
 /**
-Created by Denis Chornyy on 02,Июль,2020
+Created by pikassa, support@pikassa.io on 02,Июль,2020
 All rights received.
  */
 object InternetUtil : LiveData<Boolean>() {

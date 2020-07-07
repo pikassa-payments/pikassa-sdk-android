@@ -6,7 +6,7 @@ import io.pikassa.sample.entities.OrderResponse
 import retrofit2.HttpException
 
 /**
-Created by Denis Chornyy on 02,Июль,2020
+Created by pikassa, support@pikassa.io on 02,Июль,2020
 All rights received.
  */
 

@@ -6,7 +6,7 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 
 /**
-Created by Denis Chornyy on 30,Июнь,2020
+Created by pikassa, support@pikassa.io on 30,Июнь,2020
 All rights received.
  */
 

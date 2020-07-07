@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.webkit.WebChromeClient
 import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import android.webkit.WebViewClient
@@ -15,10 +16,10 @@ import io.pikassa.sample.databinding.FragmentWebViewBinding
 
 
 /**
-Created by Denis Chornyy on 02,Июль,2020
+Created by pikassa, support@pikassa.io on 02,Июль,2020
 All rights received.
  */
-class WebViewFragment: Fragment() {
+class WebViewFragment : Fragment() {
 
     private val args: WebViewFragmentArgs by navArgs()
 
@@ -33,11 +34,14 @@ class WebViewFragment: Fragment() {
             override fun shouldOverrideUrlLoading(
                 view: WebView,
                 request: WebResourceRequest
-            ): Boolean  {
+            ): Boolean {
                 if (request.url.toString() == requireContext().resources.getString(R.string.payment_url_link)) {
-                        val action = WebViewFragmentDirections.actionWebViewFragmentToTransactionInfoFragment(args.uuid)
-                        findNavController().navigate(action)
-                    }
+                    val action =
+                        WebViewFragmentDirections.actionWebViewFragmentToTransactionInfoFragment(
+                            args.uuid
+                        )
+                    findNavController().navigate(action)
+                }
                 return false
             }
         }

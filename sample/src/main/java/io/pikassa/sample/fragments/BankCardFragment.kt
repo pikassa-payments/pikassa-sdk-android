@@ -43,7 +43,10 @@ class BankCardFragment : Fragment() {
             hideKeyboard()
             //activity?.shortToast(it.toString())
             if (it.redirect != null) {
-                val action = BankCardFragmentDirections.actionBankCardFragmentToWebViewFragment(it.redirect!!.url, args.uuid)
+                val action = BankCardFragmentDirections.actionBankCardFragmentToWebViewFragment(
+                    it.redirect!!.url,
+                    args.uuid
+                )
                 findNavController().navigate(action)
             } else {
                 val action = BankCardFragmentDirections.gotoTransactionHistory(args.uuid)
@@ -58,10 +61,5 @@ class BankCardFragment : Fragment() {
         viewModel.noInternet.observe(
             viewLifecycleOwner,
             Observer { activity?.shortToast(getString(R.string.no_internet)) })
-    }
-
-    companion object {
-        @JvmStatic
-        fun newInstance() = BankCardFragment()
     }
 }
