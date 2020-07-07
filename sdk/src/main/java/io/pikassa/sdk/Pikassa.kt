@@ -16,7 +16,7 @@ All rights received.
 object Pikassa {
 
 
-    private lateinit var job: Job
+    private var job: Job? = null
 
     // variable for apiKey
     private lateinit var apiKey: String
@@ -67,6 +67,6 @@ object Pikassa {
      * method for closing coroutines to prevent io exceptions
      */
     fun close() {
-        job.cancel()
+        job?.cancel()
     }
 }
