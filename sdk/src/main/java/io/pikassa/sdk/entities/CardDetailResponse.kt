@@ -1,7 +1,7 @@
 package io.pikassa.sdk.entities
 
 /**
-Created by Denis Chornyy on 25,Июнь,2020
+Created by pikassa, support@pikassa.io on 25,Июнь,2020
 All rights received.
  */
 

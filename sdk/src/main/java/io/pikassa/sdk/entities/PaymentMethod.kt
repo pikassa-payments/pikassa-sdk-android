@@ -3,7 +3,7 @@ package io.pikassa.sdk.entities
 import com.google.gson.annotations.SerializedName
 
 /**
-Created by Denis Chornyy on 25,Июнь,2020
+Created by pikassa, support@pikassa.io on 25,Июнь,2020
 All rights received.
  */
 /**
