@@ -45,8 +45,10 @@
                     android:id="@+id/edittextNumberCard"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:inputType="number"
                     android:layout_marginEnd="@dimen/card_margin"
                     android:hint="@string/card_number"
+                    android:maxLength="19"
                     android:singleLine="true"
                     android:text="@={viewmodel.panField.data.ld()}" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -81,7 +83,7 @@
                 android:layout_margin="@dimen/common_margin"
                 android:layout_marginTop="@dimen/common_margin"
                 android:layout_marginEnd="@dimen/card_margin"
-                app:error="@{viewmodel.expYearField.error.ld()}"
+                app:error="@{viewmodel.expYearError}"
                 app:layout_constraintLeft_toLeftOf="@+id/textviewCardCredentials"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/TextInputEnterHolder">
@@ -91,9 +93,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="@dimen/card_margin"
+                    android:inputType="number"
+                    android:maxLength="2"
                     android:hint="@string/exp_year"
                     android:singleLine="true"
-                    android:text="@={viewmodel.expYearField.data.ld()}" />
+                    android:text="@={viewmodel.expYearLD}" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -103,7 +107,7 @@
                 android:layout_margin="@dimen/common_margin"
                 android:layout_marginTop="@dimen/common_margin"
                 android:layout_marginEnd="@dimen/card_margin"
-                app:error="@{viewmodel.expMonthField.error.ld()}"
+                app:error="@{viewmodel.expMonthError}"
                 app:layout_constraintLeft_toLeftOf="@+id/textviewCardCredentials"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/TextInputEnterExpYear">
@@ -112,10 +116,12 @@
                     android:id="@+id/edittextExpMonth"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:maxLength="2"
+                    android:inputType="number"
                     android:layout_marginEnd="@dimen/card_margin"
                     android:hint="@string/exp_month"
                     android:singleLine="true"
-                    android:text="@={viewmodel.expMonthField.data.ld()}" />
+                    android:text="@={viewmodel.expMonthLD}" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -133,6 +139,8 @@
                 <androidx.appcompat.widget.AppCompatEditText
                     android:id="@+id/edittextCvcCode"
                     android:layout_width="match_parent"
+                    android:maxLength="3"
+                    android:inputType="number"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="@dimen/card_margin"
                     android:hint="@string/edittext_cvcCode"

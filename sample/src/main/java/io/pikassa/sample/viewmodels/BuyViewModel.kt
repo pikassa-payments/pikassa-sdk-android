@@ -30,7 +30,7 @@ class BuyViewModel(application: Application) : BaseViewModel(application) {
     private val coroutineScope = CoroutineScope(Dispatchers.IO)
 
     val amountField = FormField<String, StringDesc>("123", liveBlock { kilos ->
-        if (kilos.isBlank() || kilos.toIntOrNull() == null)
+        if (kilos.isBlank() || kilos.toIntOrNull() == null || kilos.length > 10)
             application.getString(R.string.amount_error).desc()
         else
             null
