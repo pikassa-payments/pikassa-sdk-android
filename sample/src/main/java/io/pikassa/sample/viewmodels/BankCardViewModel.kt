@@ -33,7 +33,7 @@ class BankCardViewModel(application: Application, private val uuid: String) :
     val panField = FormField<String, StringDesc>(
         application.resources.getString(R.string.test_pan),
         liveBlock { pan ->
-            if (pan.isBlank() || pan.length != application.resources.getInteger(R.integer.pan_amount))
+            if (pan.isBlank() || pan.length < application.resources.getInteger(R.integer.pan_amount))
                 application.getString(R.string.error_invalid_amount_of_numbers).desc()
             else
                 null
@@ -47,21 +47,13 @@ class BankCardViewModel(application: Application, private val uuid: String) :
             else null
         })
 
-    val expYearField = FormField<String, StringDesc>(
-        application.resources.getString(R.string.test_exp_year),
-        liveBlock { expYear ->
-            if (expYear.isBlank() || expYear.length != application.resources.getInteger(R.integer.exp_year_amount))
-                application.resources.getString(R.string.error_invalid_amount_of_numbers).desc()
-            else null
-        })
+    val expYearLD =
+        androidx.lifecycle.MutableLiveData(application.resources.getString(R.string.test_exp_year))
+    val expMonthLD =
+        androidx.lifecycle.MutableLiveData(application.resources.getString(R.string.test_exp_month))
+    val expYearError = androidx.lifecycle.MutableLiveData("")
+    val expMonthError = androidx.lifecycle.MutableLiveData("")
 
-    val expMonthField = FormField<String, StringDesc>(
-        application.resources.getString(R.string.test_exp_month),
-        liveBlock { expYear ->
-            if (expYear.isBlank() || expYear.length != application.resources.getInteger(R.integer.exp_month_amount))
-                application.resources.getString(R.string.error_invalid_amount_of_numbers).desc()
-            else null
-        })
 
     val cvcField = FormField<String, StringDesc>(
         application.resources.getString(R.string.test_cvc),
@@ -72,11 +64,36 @@ class BankCardViewModel(application: Application, private val uuid: String) :
                 null
         })
 
-    private val fields = listOf(panField, holderField, cvcField, expYearField, expMonthField)
+    private val fields = listOf(panField, holderField, cvcField)
+
+    private fun checkYearValidation(): Boolean {
+        val currentYear = Calendar.getInstance().get(Calendar.YEAR) - 2000
+        return expYearLD.value!!.toInt() >= currentYear
+    }
+
+    private fun checkMonthValidation(): Boolean {
+        val currentMonth = Calendar.getInstance().get(Calendar.MONTH) + 1
+        return when (Calendar.getInstance().get(Calendar.YEAR) - 2000) {
+            expYearLD.value!!.toInt() -> {
+                !(expMonthLD.value!!.toInt() < currentMonth || expMonthLD.value!!.toInt() > 12 || expMonthLD.value!!.toInt() < 1 || expMonthLD.value!!.length != 2)
+            }
+            else -> expMonthLD.value!!.toInt() <= 12 && expMonthLD.value!!.length == 2 && expMonthLD.value!!.toInt() >= 1
+        }
+    }
 
     fun requestPayment() {
-        if (!fields.validate()) return
+        var success = true
+        if (!checkYearValidation()) {
+            expYearError.value = "Проверьте парвильность введенных данных!"
+            success = false
+        } else expYearError.value = null
+        if (!checkMonthValidation()) {
+            expMonthError.value = "Проверьте правильность введенных данных"
+            success = false
+        } else expMonthError.value = null
+        if (!fields.validate() || !success) return
         if (!checkInternet()) return
+
 
         isLoading.value = true
         val requestId = UUID.randomUUID().toString()
@@ -88,8 +105,8 @@ class BankCardViewModel(application: Application, private val uuid: String) :
             CardDetails(
                 panField.value(),
                 holderField.value(),
-                expYearField.value(),
-                expMonthField.value(),
+                expYearLD.value.toString(),
+                expMonthLD.value.toString(),
                 cvcField.value(),
                 null
             ),
