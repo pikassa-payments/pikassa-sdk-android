@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/navigation_sample"
+    app:startDestination="@id/buyFragment">
+
+    <fragment
+        android:id="@+id/buyFragment"
+        android:name="io.pikassa.sample.fragments.BuyFragment"
+        android:label="BuyFragment" >
+        <action
+            android:id="@+id/gotoCardInfo"
+            app:destination="@id/bankCardFragment"
+            app:popUpTo="@id/buyFragment"
+            app:popUpToInclusive="false" />
+    </fragment>
+    <fragment
+        android:id="@+id/bankCardFragment"
+        android:name="io.pikassa.sample.fragments.BankCardFragment"
+        android:label="BankCardFragment" >
+        <action
+            android:id="@+id/goto_TransactionHistory"
+            app:destination="@id/transactionInfoFragment"
+            app:popUpTo="@id/bankCardFragment"
+            app:popUpToInclusive="false" />
+        <argument
+            android:name="invoiceUuid"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_bankCardFragment_to_webViewFragment"
+            app:destination="@id/webViewFragment"
+            app:popUpTo="@id/bankCardFragment" />
+        <argument
+            android:name="uuid"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/transactionInfoFragment"
+        android:name="io.pikassa.sample.fragments.TransactionInfoFragment"
+        android:label="TransactionInfoFragment" >
+        <argument
+            android:name="uuid"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/webViewFragment"
+        android:name="io.pikassa.sample.fragments.WebViewFragment"
+        android:label="WebViewFragment" >
+        <action
+            android:id="@+id/action_webViewFragment_to_transactionInfoFragment"
+            app:destination="@id/transactionInfoFragment"
+            app:popUpTo="@id/bankCardFragment" />
+        <argument
+            android:name="url"
+            app:argType="string" />
+        <argument
+            android:name="uuid"
+            app:argType="string" />
+    </fragment>
+</navigation>
