@@ -73,11 +73,17 @@ class BankCardViewModel(application: Application, private val uuid: String) :
 
     private fun checkMonthValidation(): Boolean {
         val currentMonth = Calendar.getInstance().get(Calendar.MONTH) + 1
-        return when (Calendar.getInstance().get(Calendar.YEAR) - 2000) {
-            expYearLD.value!!.toInt() -> {
-                !(expMonthLD.value!!.toInt() < currentMonth || expMonthLD.value!!.toInt() > 12 || expMonthLD.value!!.toInt() < 1 || expMonthLD.value!!.length != 2)
+        val currentYear = Calendar.getInstance().get(Calendar.YEAR).toString().substring(2).toInt()
+
+        val placedYear = expYearLD.value?.toInt() ?: 0
+        val placedMonth = expMonthLD.value?.toInt() ?: 0
+        val monthStr = expMonthLD.value ?: ""
+
+        return when (currentYear) {
+            placedYear -> {
+                placedMonth >= currentMonth && placedMonth in 1..12 && monthStr.length == 2
             }
-            else -> expMonthLD.value!!.toInt() <= 12 && expMonthLD.value!!.length == 2 && expMonthLD.value!!.toInt() >= 1
+            else -> placedMonth in 1..12 && monthStr.length == 2
         }
     }
 
