@@ -32,6 +32,12 @@
         <argument
             android:name="uuid"
             app:argType="string" />
+        <argument
+            android:name="successUrl"
+            app:argType="string" />
+        <argument
+            android:name="failUrl"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/transactionInfoFragment"
@@ -54,6 +60,12 @@
             app:argType="string" />
         <argument
             android:name="uuid"
+            app:argType="string" />
+        <argument
+            android:name="successUrl"
+            app:argType="string" />
+        <argument
+            android:name="failUrl"
             app:argType="string" />
     </fragment>
 </navigation>

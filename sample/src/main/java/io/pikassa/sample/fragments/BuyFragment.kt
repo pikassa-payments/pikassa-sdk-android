@@ -36,7 +36,12 @@ class BuyFragment : Fragment() {
     private fun observeViewModel(viewModel: BuyViewModel) {
         viewModel.paymentCreated.observe(viewLifecycleOwner, Observer {
             hideKeyboard()
-            val action = BuyFragmentDirections.gotoCardInfo(it.invoiceUuid, it.uuid)
+            val action = BuyFragmentDirections.gotoCardInfo(
+                it.invoiceUuid,
+                it.uuid,
+                it.successUrl,
+                it.failUrl
+            )
             findNavController().navigate(action)
         })
         viewModel.isError.observe(

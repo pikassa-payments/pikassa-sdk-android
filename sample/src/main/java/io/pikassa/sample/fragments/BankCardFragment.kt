@@ -45,7 +45,9 @@ class BankCardFragment : Fragment() {
             if (it.redirect != null) {
                 val action = BankCardFragmentDirections.actionBankCardFragmentToWebViewFragment(
                     it.redirect!!.url,
-                    args.uuid
+                    args.uuid,
+                    args.successUrl,
+                    args.failUrl
                 )
                 findNavController().navigate(action)
             } else {
