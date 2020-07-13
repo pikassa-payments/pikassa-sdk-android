@@ -88,6 +88,7 @@
                     android:imeOptions="actionDone"
                     android:inputType="numberDecimal"
                     android:maxLength="5"
+                    android:text="@={viewmodel.amountField.data.ld}"
                     android:focusableInTouchMode="true"
                     android:singleLine="true"/>
             </com.google.android.material.textfield.TextInputLayout>

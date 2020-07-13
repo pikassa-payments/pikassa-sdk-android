@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -10,153 +11,235 @@
         <import type="android.view.View" />
     </data>
 
-    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
+        android:layout_height="match_parent"
+        android:background="@color/colorPrimary">
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent"
+            android:background="@drawable/layout_bg">
 
-            <TextView
-                android:id="@+id/textviewCardCredentials"
+            <ImageView
+                android:id="@+id/imgShoppingCart"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/card_margin"
-                android:text="@string/enter_card_info"
+                android:layout_marginStart="@dimen/buy_margin_start"
+                android:layout_marginTop="@dimen/buy_margin_top"
+                android:contentDescription="@string/buy_description_cart"
+                android:src="@drawable/ic_shopping_cart"
                 app:layout_constraintLeft_toLeftOf="parent"
-
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/TextInputEnterPan"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/common_margin"
-                android:layout_marginTop="@dimen/common_margin"
-                android:layout_marginEnd="@dimen/card_margin"
-                app:error="@{viewmodel.panField.error.ld()}"
-                app:layout_constraintLeft_toLeftOf="@+id/textviewCardCredentials"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textviewCardCredentials">
-
-                <androidx.appcompat.widget.AppCompatEditText
-                    android:id="@+id/edittextNumberCard"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="number"
-                    android:layout_marginEnd="@dimen/card_margin"
-                    android:hint="@string/card_number"
-                    android:maxLength="19"
-                    android:singleLine="true"
-                    android:text="@={viewmodel.panField.data.ld()}" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/TextInputEnterHolder"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/common_margin"
-                android:layout_marginTop="@dimen/common_margin"
-                android:layout_marginEnd="@dimen/card_margin"
-                app:error="@{viewmodel.holderField.error.ld()}"
-                app:layout_constraintLeft_toLeftOf="@+id/textviewCardCredentials"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/TextInputEnterPan">
-
-                <androidx.appcompat.widget.AppCompatEditText
-                    android:id="@+id/edittextCardHolder"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/card_margin"
-                    android:hint="@string/edittext_cardHolder"
-                    android:singleLine="true"
-                    android:text="@={viewmodel.holderField.data.ld()}" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/TextInputEnterExpYear"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/common_margin"
-                android:layout_marginTop="@dimen/common_margin"
-                android:layout_marginEnd="@dimen/card_margin"
-                app:error="@{viewmodel.expYearError}"
-                app:layout_constraintLeft_toLeftOf="@+id/textviewCardCredentials"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/TextInputEnterHolder">
-
-                <androidx.appcompat.widget.AppCompatEditText
-                    android:id="@+id/edittextExpYear"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/card_margin"
-                    android:inputType="number"
-                    android:maxLength="2"
-                    android:hint="@string/exp_year"
-                    android:singleLine="true"
-                    android:text="@={viewmodel.expYearLD}" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/TextInputEnterExpMonth"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/common_margin"
-                android:layout_marginTop="@dimen/common_margin"
-                android:layout_marginEnd="@dimen/card_margin"
-                app:error="@{viewmodel.expMonthError}"
-                app:layout_constraintLeft_toLeftOf="@+id/textviewCardCredentials"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/TextInputEnterExpYear">
-
-                <androidx.appcompat.widget.AppCompatEditText
-                    android:id="@+id/edittextExpMonth"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:maxLength="2"
-                    android:inputType="number"
-                    android:layout_marginEnd="@dimen/card_margin"
-                    android:hint="@string/exp_month"
-                    android:singleLine="true"
-                    android:text="@={viewmodel.expMonthLD}" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/TextInputEnterCvc"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/common_margin"
-                android:layout_marginTop="@dimen/common_margin"
-                android:layout_marginEnd="@dimen/card_margin"
-                app:error="@{viewmodel.cvcField.error.ld()}"
-                app:layout_constraintLeft_toLeftOf="@+id/textviewCardCredentials"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/TextInputEnterExpMonth">
-
-                <androidx.appcompat.widget.AppCompatEditText
-                    android:id="@+id/edittextCvcCode"
-                    android:layout_width="match_parent"
-                    android:maxLength="3"
-                    android:inputType="number"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/card_margin"
-                    android:hint="@string/edittext_cvcCode"
-                    android:singleLine="true"
-                    android:text="@={viewmodel.cvcField.data.ld()}" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <androidx.appcompat.widget.AppCompatButton
+            <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/common_margin"
-                android:onClick="@{() -> viewmodel.requestPayment()}"
-                android:text="@string/button_buy"
+                android:layout_marginStart="@dimen/buy_margin_title"
+                android:text="@string/buy_shop_title"
+                app:layout_constraintBottom_toBottomOf="@+id/imgShoppingCart"
+                app:layout_constraintLeft_toRightOf="@+id/imgShoppingCart"
+                app:layout_constraintTop_toTopOf="@+id/imgShoppingCart" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="@dimen/buy_separator_margin_top"
+                android:layout_marginEnd="@dimen/buy_separator_margin"
+                android:alpha="0.2"
+                android:background="@android:color/black"
+                app:layout_constraintLeft_toLeftOf="@+id/imgShoppingCart"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imgShoppingCart" />
+
+            <ImageView
+                android:id="@+id/imgCard"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/bank_card_margin_top"
+                android:src="@drawable/ic_credit_card"
+                app:layout_constraintLeft_toLeftOf="@+id/imgShoppingCart"
+                app:layout_constraintTop_toBottomOf="@id/imgShoppingCart" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/bank_card_title_margin"
+                android:text="@string/bank_card_title"
+                app:layout_constraintBottom_toBottomOf="@id/imgCard"
+                app:layout_constraintLeft_toRightOf="@id/imgCard"
+                app:layout_constraintTop_toTopOf="@id/imgCard" />
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/TextInputEnterCvc" />
+                app:layout_constraintTop_toBottomOf="@+id/imgCard">
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/TextInputEnterPan"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/buy_margin_start"
+                        android:layout_marginTop="@dimen/bank_card_pan_margin_top"
+                        android:layout_marginEnd="@dimen/buy_margin_start"
+                        android:background="@color/colorBackground"
+                        android:paddingTop="@dimen/common_margin"
+                        app:boxCornerRadiusTopEnd="@dimen/rounded_corners"
+                        app:boxCornerRadiusTopStart="@dimen/rounded_corners"
+                        app:error="@{viewmodel.panField.error.ld}"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <androidx.appcompat.widget.AppCompatEditText
+                            android:id="@+id/edittextPan"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/buy_input_height"
+                            android:focusableInTouchMode="true"
+                            android:hint="@string/pan_placeholder"
+                            android:inputType="numberDecimal"
+                            android:maxLength="19"
+                            android:singleLine="true"
+                            android:text="@={viewmodel.panField.data.ld}" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/TextInputEnterHolder"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/buy_margin_start"
+                        android:layout_marginTop="@dimen/bank_margin_holder_top"
+                        android:layout_marginEnd="@dimen/buy_margin_start"
+                        android:background="@color/colorBackground"
+                        android:paddingTop="@dimen/common_margin"
+                        app:boxCornerRadiusTopEnd="@dimen/rounded_corners"
+                        app:boxCornerRadiusTopStart="@dimen/rounded_corners"
+                        app:error="@{viewmodel.holderField.error.ld}"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/TextInputEnterPan">
+
+                        <androidx.appcompat.widget.AppCompatEditText
+                            android:id="@+id/edittextCardHolder"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/buy_input_height"
+                            android:focusableInTouchMode="true"
+                            android:hint="@string/holder_placeholder"
+                            android:singleLine="true"
+                            android:text="@={viewmodel.holderField.data.ld}" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/TextInputEnterExpirationDate"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/buy_margin_start"
+                        android:layout_marginTop="@dimen/bank_margin_holder_top"
+                        android:layout_marginEnd="@dimen/buy_margin_start"
+                        android:background="@color/colorBackground"
+                        android:paddingTop="@dimen/common_margin"
+                        app:boxCornerRadiusTopEnd="@dimen/rounded_corners"
+                        app:boxCornerRadiusTopStart="@dimen/rounded_corners"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/TextInputEnterHolder"
+                        app:layout_constraintWidth_percent="0.55">
+
+                        <androidx.appcompat.widget.AppCompatEditText
+                            android:id="@+id/edittextExpirationDate"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/buy_input_height"
+                            android:focusableInTouchMode="true"
+                            android:hint="@string/exp_placeholder"
+                            android:inputType="numberDecimal"
+                            android:maxLength="5"
+                            android:singleLine="true"
+                            android:text="@={viewmodel.expYearLD}" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/TextInputEnterCvc"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/common_margin"
+                        android:layout_marginTop="@dimen/bank_margin_holder_top"
+                        android:layout_marginEnd="@dimen/buy_margin_start"
+                        android:background="@color/colorBackground"
+                        android:paddingTop="@dimen/common_margin"
+                        app:boxCornerRadiusTopEnd="@dimen/rounded_corners"
+                        app:boxCornerRadiusTopStart="@dimen/rounded_corners"
+                        app:layout_constraintLeft_toRightOf="@id/TextInputEnterExpirationDate"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/TextInputEnterHolder">
+
+                        <androidx.appcompat.widget.AppCompatEditText
+                            android:id="@+id/edittextCvc"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/buy_input_height"
+                            android:autofillHints="@string/amount_placeholder"
+                            android:focusableInTouchMode="true"
+                            android:hint="@string/cvv_placeholder"
+                            android:imeOptions="actionDone"
+                            android:inputType="numberDecimal"
+                            android:maxLength="3"
+                            android:singleLine="true"
+                            android:text="@={viewmodel.cvcField.data.ld}" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <ImageView
+                        android:id="@+id/imgVerified"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/bank_margin_verified"
+                        android:contentDescription="@string/verified_transaction"
+                        android:src="@drawable/ic_verified"
+                        app:layout_constraintLeft_toLeftOf="@+id/TextInputEnterExpirationDate"
+                        app:layout_constraintTop_toBottomOf="@+id/TextInputEnterExpirationDate" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/common_margin"
+                        android:text="@string/text_verified"
+                        android:layout_marginEnd="@dimen/buy_margin_start"
+                        android:textSize="10sp"
+                        android:textColor="@color/colorTextSecondary"
+                        app:layout_constraintBottom_toBottomOf="@id/imgVerified"
+                        app:layout_constraintLeft_toRightOf="@+id/imgVerified"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/imgVerified"
+                        tools:ignore="SmallSp" />
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/buttonAcceptInvoice"
+                        android:layout_width="match_parent"
+                        android:layout_height="56dp"
+                        android:layout_marginStart="@dimen/buy_margin_start"
+                        android:layout_marginEnd="@dimen/buy_margin_start"
+                        android:text="@{viewmodel.invoiceValue}"
+                        android:onClick="@{() -> viewmodel.requestPayment()}"
+                        android:layout_marginTop="52dp"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/imgVerified" />
+
+                    <ImageView
+                        android:id="@+id/imgPikassaLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="24dp"
+                        android:layout_marginTop="@dimen/bank_margin_label_pikassa"
+                        android:contentDescription="@string/logo_app"
+                        android:src="@drawable/ic_pikassa_small"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/buttonAcceptInvoice"/>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </ScrollView>
 
             <ProgressBar
                 android:id="@+id/progressBuy"
@@ -169,5 +252,6 @@
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </ScrollView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

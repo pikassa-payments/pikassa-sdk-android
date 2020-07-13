@@ -7,6 +7,7 @@ import dev.icerock.moko.fields.validate
 import dev.icerock.moko.resources.desc.StringDesc
 import dev.icerock.moko.resources.desc.desc
 import io.pikassa.sample.R
+import io.pikassa.sample.entities.OrderData
 import io.pikassa.sample.utils.SingleLiveEvent
 import io.pikassa.sdk.Pikassa
 import io.pikassa.sdk.entities.CardDetails
@@ -19,7 +20,7 @@ import java.util.*
 Created by pikassa, support@pikassa.io on 29,Июнь,2020
 All rights received.
  */
-class BankCardViewModel(application: Application, private val uuid: String) :
+class BankCardViewModel(application: Application, private val orderData: OrderData) :
     BaseViewModel(application) {
     companion object {
         // api key for payment request
@@ -29,9 +30,10 @@ class BankCardViewModel(application: Application, private val uuid: String) :
     var isLoading = SingleLiveEvent<Boolean>()
     var errorReceived = SingleLiveEvent<ResponseError>()
     var requestReceived = SingleLiveEvent<ResponseData>()
+    val invoiceValue = "Оплатить ${orderData.amount} Р"
 
     val panField = FormField<String, StringDesc>(
-        application.resources.getString(R.string.test_pan),
+        "",
         liveBlock { pan ->
             if (pan.isBlank() || pan.length < application.resources.getInteger(R.integer.pan_amount))
                 application.getString(R.string.error_invalid_amount_of_numbers).desc()
@@ -40,7 +42,7 @@ class BankCardViewModel(application: Application, private val uuid: String) :
         })
 
     val holderField = FormField<String, StringDesc>(
-        application.resources.getString(R.string.test_holder),
+        "",
         liveBlock { holder ->
             if (holder.isBlank())
                 application.getString(R.string.field_empty_error).desc()
@@ -105,7 +107,7 @@ class BankCardViewModel(application: Application, private val uuid: String) :
         val requestId = UUID.randomUUID().toString()
         Pikassa.init(API_KEY)
         Pikassa.sendCardData(
-            uuid,
+            orderData.uuid,
             requestId,
             PaymentMethod.BANK_CARD,
             CardDetails(

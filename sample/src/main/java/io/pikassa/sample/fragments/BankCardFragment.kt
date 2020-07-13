@@ -21,7 +21,7 @@ class BankCardFragment : Fragment() {
 
     private val args: BankCardFragmentArgs by navArgs()
     private val viewModel: BankCardViewModel by viewModels {
-        BankCardViewModelFactory(requireActivity().application, args.invoiceUuid)
+        BankCardViewModelFactory(requireActivity().application, args.orderData)
     }
 
     override fun onCreateView(
@@ -45,13 +45,13 @@ class BankCardFragment : Fragment() {
             if (it.redirect != null) {
                 val action = BankCardFragmentDirections.actionBankCardFragmentToWebViewFragment(
                     it.redirect!!.url,
-                    args.uuid,
-                    args.successUrl,
-                    args.failUrl
+                    args.orderData.uuid,
+                    args.orderData.successUrl,
+                    args.orderData.failUrl
                 )
                 findNavController().navigate(action)
             } else {
-                val action = BankCardFragmentDirections.gotoTransactionHistory(args.uuid)
+                val action = BankCardFragmentDirections.gotoTransactionHistory(args.orderData.uuid)
                 findNavController().navigate(action)
             }
         })

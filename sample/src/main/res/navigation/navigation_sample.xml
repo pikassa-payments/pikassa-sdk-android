@@ -22,22 +22,13 @@
             app:destination="@id/transactionInfoFragment"
             app:popUpTo="@id/bankCardFragment"
             app:popUpToInclusive="false" />
-        <argument
-            android:name="invoiceUuid"
-            app:argType="string" />
         <action
             android:id="@+id/action_bankCardFragment_to_webViewFragment"
             app:destination="@id/webViewFragment"
             app:popUpTo="@id/bankCardFragment" />
         <argument
-            android:name="uuid"
-            app:argType="string" />
-        <argument
-            android:name="successUrl"
-            app:argType="string" />
-        <argument
-            android:name="failUrl"
-            app:argType="string" />
+            android:name="orderData"
+            app:argType="io.pikassa.sample.entities.OrderData" />
     </fragment>
     <fragment
         android:id="@+id/transactionInfoFragment"

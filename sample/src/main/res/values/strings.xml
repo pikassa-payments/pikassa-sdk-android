@@ -33,4 +33,11 @@
     <string name="buy_description_cart">Buy icon</string>
     <string name="buy_shop_title">Заказ в магазине\n\"Test Shop\"</string>
     <string name="logo_app">logo app</string>
+    <string name="bank_card_title">Оплата банковской картой</string>
+    <string name="pan_placeholder">Номер карты</string>
+    <string name="holder_placeholder">Имя и фамилия владельца карты</string>
+    <string name="exp_placeholder">Срок действия карты</string>
+    <string name="cvv_placeholder">CVV код</string>
+    <string name="verified_transaction">verified transaction</string>
+    <string name="text_verified">Данные карты передаются в зашифрованном виде</string>
 </resources>
