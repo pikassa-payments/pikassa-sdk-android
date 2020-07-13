@@ -1,13 +1,13 @@
 package io.pikassa.sdk.entities
 
 import com.google.gson.annotations.SerializedName
-import io.pikassa.sdk.entities.interfaces.IDescription
+import io.pikassa.sdk.entities.interfaces.IErrorDescription
 
 /**
-Created by Denis Chornyy on 25,Июнь,2020
+Created by pikassa, support@pikassa.io on 25,Июнь,2020
 All rights received.
  */
-enum class PaymentErrorCode(val code: String) : IDescription {
+enum class PaymentErrorCode(val code: String) : IErrorDescription {
     @SerializedName("1")
     CreateAccountError("1") {
         override fun getDescription(): String = "1 - Ошибка создания счета"

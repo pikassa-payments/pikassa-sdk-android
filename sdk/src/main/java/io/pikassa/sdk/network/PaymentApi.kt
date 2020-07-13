@@ -8,7 +8,7 @@ import retrofit2.http.PUT
 import retrofit2.http.Path
 
 /**
-Created by Denis Chornyy on 25,Июнь,2020
+Created by pikassa, support@pikassa.io on 25,Июнь,2020
 All rights received.
  */
 
