@@ -2,4 +2,16 @@
 <resources>
     <dimen name="common_margin">8dp</dimen>
     <dimen name="card_margin">40dp</dimen>
+    <dimen name="buy_margin_top">48dp</dimen>
+    <dimen name="buy_margin_start">32dp</dimen>
+    <dimen name="buy_margin_title">24dp</dimen>
+    <dimen name="common_text_size">16sp</dimen>
+    <dimen name="common_button_size">14sp</dimen>
+    <dimen name="buy_margin_amount_top">148dp</dimen>
+    <dimen name="buy_input_height">56dp</dimen>
+    <dimen name="text_size_small">12sp</dimen>
+    <dimen name="buy_margin_bottom">40dp</dimen>
+    <dimen name="buy_separator_margin">56dp</dimen>
+    <dimen name="buy_separator_margin_top">26dp</dimen>
+    <dimen name="rounded_corners">4dp</dimen>
 </resources>
