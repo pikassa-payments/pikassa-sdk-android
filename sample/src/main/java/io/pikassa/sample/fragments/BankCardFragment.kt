@@ -42,9 +42,10 @@ class BankCardFragment : Fragment() {
         viewModel.requestReceived.observe(viewLifecycleOwner, Observer {
             hideKeyboard()
             //activity?.shortToast(it.toString())
-            if (it.redirect != null) {
+            val redirect = it.redirect
+            if (redirect != null) {
                 val action = BankCardFragmentDirections.actionBankCardFragmentToWebViewFragment(
-                    it.redirect!!.url,
+                    redirect.url,
                     args.uuid,
                     args.successUrl,
                     args.failUrl
