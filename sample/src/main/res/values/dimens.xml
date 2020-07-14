@@ -20,4 +20,9 @@
     <dimen name="bank_margin_holder_top">28dp</dimen>
     <dimen name="bank_margin_verified">20dp</dimen>
     <dimen name="bank_margin_label_pikassa">24dp</dimen>
+    <dimen name="info_margin_top">96dp</dimen>
+    <dimen name="status_margin_eft">20dp</dimen>
+    <dimen name="status_margin_order_num">52dp</dimen>
+    <dimen name="order_num_margin_start">12dp</dimen>
+    <dimen name="status_button_margin_bottom">24dp</dimen>
 </resources>

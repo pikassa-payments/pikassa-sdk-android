@@ -32,7 +32,7 @@
     <string name="test_cvc">123</string>
     <string name="test_exp_year">24</string>
     <string name="test_exp_month">12</string>
-    <string name="no_internet">No Internet Connection! Please check it.</string>
+    <string name="no_internet">Нет интернет соединения! Пожалуйста, проверьте сеть.</string>
     <string name="buy_description_cart">Buy icon</string>
     <string name="buy_shop_title">Заказ в магазине\n\"Test Shop\"</string>
     <string name="logo_app">logo app</string>
@@ -43,4 +43,10 @@
     <string name="cvv_placeholder">CVV код</string>
     <string name="verified_transaction">verified transaction</string>
     <string name="text_verified">Данные карты передаются в зашифрованном виде</string>
+    <string name="text_invoice_accepted">Заказ успешно оплачен</string>
+    <string name="text_invoice_cancelled">Ошибка проведения платежа</string>
+    <string name="text_invoice_in_progress">Идет получение статуса платежа…</string>
+    <string name="status_order_number">номер заказа</string>
+    <string name="sum_title">сумма</string>
+    <string name="button_new_order">новый заказ</string>
 </resources>

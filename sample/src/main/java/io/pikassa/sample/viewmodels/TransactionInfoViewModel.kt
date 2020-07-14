@@ -2,8 +2,10 @@ package io.pikassa.sample.viewmodels
 
 import android.app.Application
 import androidx.lifecycle.MutableLiveData
+import io.pikassa.sample.entities.InvoiceStatus
 import io.pikassa.sample.entities.OrderError
 import io.pikassa.sample.entities.OrderHistoryData
+import io.pikassa.sample.entities.StatusInvoice
 import io.pikassa.sample.helpers.OrderNetworkHelper
 import io.pikassa.sample.repository.OrdersRepository
 import io.pikassa.sample.utils.SingleLiveEvent
@@ -19,12 +21,11 @@ class TransactionInfoViewModel(application: Application, private val uuid: Strin
     companion object {
         const val DELAY = 2000L
     }
-
-    var newUUID = MutableLiveData<String>()
-    var newAmount = MutableLiveData<String>()
-    var newStatus = MutableLiveData<String>()
-    var newTime = MutableLiveData<String>()
     var error = SingleLiveEvent<OrderError>()
+    var checkSum = SingleLiveEvent<String>()
+    var orderID = SingleLiveEvent<String>()
+    var orderStatus = SingleLiveEvent<InvoiceStatus>()
+    var newOrder = SingleLiveEvent<Boolean>()
     private val coroutineScope = CoroutineScope(Dispatchers.IO)
     private val orderRepository = OrdersRepository(OrderNetworkHelper())
 
@@ -35,10 +36,9 @@ class TransactionInfoViewModel(application: Application, private val uuid: Strin
             while (true) {
                 val response = orderRepository.getStatus(uuid)
                 if (response.success) {
-                    newUUID.postValue(response.data?.uuid)
-                    newAmount.postValue(response.data?.amount.toString())
-                    newStatus.postValue(response.data?.status?.code?.getDescription())
-                    newTime.postValue(response.data?.status?.time)
+                    checkSum.postValue(response.data?.amount.toString())
+                    orderID.postValue(response.data?.uuid)
+                    orderStatus.postValue(response.data?.status?.code)
                 } else {
                     error.postValue(response.error)
                 }
@@ -46,6 +46,8 @@ class TransactionInfoViewModel(application: Application, private val uuid: Strin
             }
         }
     }
+
+    fun newOrder() = newOrder.postValue(true)
 
     override fun onCleared() {
         super.onCleared()
