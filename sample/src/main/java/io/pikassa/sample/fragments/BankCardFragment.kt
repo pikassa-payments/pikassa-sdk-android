@@ -27,7 +27,6 @@ class BankCardFragment : Fragment() {
     private val viewModel: BankCardViewModel by viewModels {
         BankCardViewModelFactory(requireActivity().application, args.orderData)
     }
-    private var panCount = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

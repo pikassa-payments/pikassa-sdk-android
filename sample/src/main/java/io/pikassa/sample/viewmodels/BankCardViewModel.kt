@@ -59,7 +59,7 @@ class BankCardViewModel(application: Application, private val orderData: OrderDa
                     getMonthFromString(it)
                 )
             )
-                application.getString(R.string.error_invalid_amount_of_numbers).desc()
+                application.getString(R.string.error_exp).desc()
             else null
         }
     )
