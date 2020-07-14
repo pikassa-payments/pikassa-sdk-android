@@ -58,7 +58,8 @@
                 android:src="@{viewmodel.orderStatus}"
                 app:layout_constraintLeft_toLeftOf="@id/imgShoppingCart"
                 app:layout_constraintTop_toBottomOf="@id/imgShoppingCart"
-                tools:src="@drawable/ic_invoice_accepted" />
+                tools:src="@drawable/ic_invoice_accepted"
+                android:contentDescription="@string/status_of_transaction" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="wrap_content"

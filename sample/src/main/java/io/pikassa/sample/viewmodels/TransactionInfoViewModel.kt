@@ -36,7 +36,7 @@ class TransactionInfoViewModel(application: Application, private val uuid: Strin
             while (true) {
                 val response = orderRepository.getStatus(uuid)
                 if (response.success) {
-                    checkSum.postValue(response.data?.amount.toString())
+                    checkSum.postValue(response.data?.amount.toString() + " Р")
                     orderID.postValue(response.data?.uuid)
                     orderStatus.postValue(response.data?.status?.code)
                 } else {

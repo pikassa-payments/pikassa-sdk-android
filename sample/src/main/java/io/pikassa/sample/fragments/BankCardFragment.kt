@@ -1,5 +1,6 @@
 package io.pikassa.sample.fragments
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -42,6 +43,7 @@ class BankCardFragment : Fragment() {
 
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
 
+            @SuppressLint("SetTextI18n")
             override fun onTextChanged(p0: CharSequence?, start: Int, removed: Int, added: Int) {
                 if (start == 1 && start+added == 2 && p0?.contains('/') == false) {
                     binding.edittextExpirationDate.setText("$p0/")

@@ -59,7 +59,8 @@
                 android:layout_marginTop="@dimen/bank_card_margin_top"
                 android:src="@drawable/ic_credit_card"
                 app:layout_constraintLeft_toLeftOf="@+id/imgShoppingCart"
-                app:layout_constraintTop_toBottomOf="@id/imgShoppingCart" />
+                app:layout_constraintTop_toBottomOf="@id/imgShoppingCart"
+                android:contentDescription="@string/card_info" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="wrap_content"

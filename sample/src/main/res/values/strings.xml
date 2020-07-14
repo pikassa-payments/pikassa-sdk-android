@@ -1,23 +1,12 @@
 <resources>
     <string name="app_name">Pikassa sample</string>
-    <string name="payment_url_link">https://pikassa.io/</string>
     <string name="textview_enter_amount">Введите количество для покупки:</string>
-    <string name="kilo">ШТ</string>
     <string name="button_buy">Купить</string>
     <string name="amount_placeholder">Количество товаров в штуках</string>
     <string name="card_info">card info</string>
     <string name="enter_card_info">Введите данные своей карты:</string>
-    <string name="card_number">Номер Вашей карты:</string>
     <string name="edittext_cardHolder">Владелец карты:</string>
-    <string name="exp_year">Год окончания срока карты:</string>
-    <string name="exp_month">Месяц окончания срока карты:</string>
-    <string name="edittext_cvcCode">Cvc код (с обратной стороны карты):</string>
-    <string name="textview_TransactionInfo">Информация по транзакции:</string>
 
-    <string name="invoice_uuid">invoice UUID:</string>
-    <string name="amount">amount:</string>
-    <string name="status">status:</string>
-    <string name="update_time">update time:</string>
 
 
     <string name="amount_error">Не должно быть пустым или слишком большим!</string>
@@ -49,4 +38,5 @@
     <string name="status_order_number">номер заказа</string>
     <string name="sum_title">сумма</string>
     <string name="button_new_order">новый заказ</string>
+    <string name="status_of_transaction">status of transaction</string>
 </resources>

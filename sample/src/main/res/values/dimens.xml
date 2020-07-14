@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="common_margin">8dp</dimen>
-    <dimen name="card_margin">40dp</dimen>
     <dimen name="buy_margin_top">48dp</dimen>
     <dimen name="buy_margin_start">32dp</dimen>
     <dimen name="buy_margin_title">24dp</dimen>

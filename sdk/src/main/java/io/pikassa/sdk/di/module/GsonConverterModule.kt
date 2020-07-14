@@ -12,5 +12,5 @@ All rights received.
 @Module
 class GsonConverterModule {
     @Provides
-    fun provideGsonConverter() = GsonConverterFactory.create()
+    fun provideGsonConverter(): GsonConverterFactory = GsonConverterFactory.create()
 }

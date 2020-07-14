@@ -1,7 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <integer name="pan_amount">16</integer>
-    <integer name="cvc_amount">3</integer>
-    <integer name="exp_year_amount">2</integer>
-    <integer name="exp_month_amount">2</integer>
 </resources>
