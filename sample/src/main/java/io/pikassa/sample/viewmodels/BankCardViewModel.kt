@@ -35,8 +35,8 @@ class BankCardViewModel(application: Application, private val orderData: OrderDa
     val panField = FormField<String, StringDesc>(
         "",
         liveBlock { pan ->
-            if (pan.isBlank() || pan.length < application.resources.getInteger(R.integer.pan_amount))
-                application.getString(R.string.error_invalid_amount_of_numbers).desc()
+            if (pan.isBlank() || pan.replace("\\s".toRegex(), "").length < application.resources.getInteger(R.integer.pan_amount))
+                application.getString(R.string.error_pan).desc()
             else
                 null
         })
@@ -44,62 +44,59 @@ class BankCardViewModel(application: Application, private val orderData: OrderDa
     val holderField = FormField<String, StringDesc>(
         "",
         liveBlock { holder ->
-            if (holder.isBlank())
-                application.getString(R.string.field_empty_error).desc()
+            if (holder.isBlank() || !holder.matches(Regex("^[a-zA-Z_ ]*\$")))
+                application.getString(R.string.error_holder).desc()
             else null
         })
 
-    val expYearLD =
-        androidx.lifecycle.MutableLiveData(application.resources.getString(R.string.test_exp_year))
-    val expMonthLD =
-        androidx.lifecycle.MutableLiveData(application.resources.getString(R.string.test_exp_month))
-    val expYearError = androidx.lifecycle.MutableLiveData("")
-    val expMonthError = androidx.lifecycle.MutableLiveData("")
-
+    val expField = FormField<String, StringDesc>(
+        "",
+        liveBlock {
+            if (it.length != 5) {
+                application.getString(R.string.error_exp).desc()
+            } else if (!checkYearValidation(getYearFromString(it)) || !checkMonthValidation(
+                    getYearFromString(it),
+                    getMonthFromString(it)
+                )
+            )
+                application.getString(R.string.error_invalid_amount_of_numbers).desc()
+            else null
+        }
+    )
 
     val cvcField = FormField<String, StringDesc>(
-        application.resources.getString(R.string.test_cvc),
-        liveBlock { cvc ->
-            if (cvc.isBlank() || cvc.length != application.resources.getInteger(R.integer.cvc_amount))
-                application.getString(R.string.error_invalid_amount_of_numbers).desc()
-            else
-                null
+        "",
+        liveBlock { _ ->
+            null
         })
 
-    private val fields = listOf(panField, holderField, cvcField)
+    private val fields = listOf(panField, holderField, expField, cvcField)
 
-    private fun checkYearValidation(): Boolean {
+    private fun getMonthFromString(value: String): String = value.substring(0, 2)
+    private fun getYearFromString(value: String): String = value.substring(3)
+
+    private fun checkYearValidation(expYear: String): Boolean {
         val currentYear = Calendar.getInstance().get(Calendar.YEAR) - 2000
-        return expYearLD.value!!.toInt() >= currentYear
+        return expYear.toIntOrNull() ?: 0 >= currentYear
     }
 
-    private fun checkMonthValidation(): Boolean {
+    private fun checkMonthValidation(expYear: String, expMonth: String): Boolean {
         val currentMonth = Calendar.getInstance().get(Calendar.MONTH) + 1
         val currentYear = Calendar.getInstance().get(Calendar.YEAR).toString().substring(2).toInt()
 
-        val placedYear = expYearLD.value?.toInt() ?: 0
-        val placedMonth = expMonthLD.value?.toInt() ?: 0
-        val monthStr = expMonthLD.value ?: ""
+        val placedYear = expYear.toIntOrNull() ?: 0
+        val placedMonth = expMonth.toIntOrNull() ?: 0
 
         return when (currentYear) {
             placedYear -> {
-                placedMonth >= currentMonth && placedMonth in 1..12 && monthStr.length == 2
+                placedMonth >= currentMonth && placedMonth in 1..12 && expMonth.length == 2
             }
-            else -> placedMonth in 1..12 && monthStr.length == 2
+            else -> placedMonth in 1..12 && expMonth.length == 2
         }
     }
 
     fun requestPayment() {
-        var success = true
-        if (!checkYearValidation()) {
-            expYearError.value = "Проверьте парвильность введенных данных!"
-            success = false
-        } else expYearError.value = null
-        if (!checkMonthValidation()) {
-            expMonthError.value = "Проверьте правильность введенных данных"
-            success = false
-        } else expMonthError.value = null
-        if (!fields.validate() || !success) return
+        if (!fields.validate()) return
         if (!checkInternet()) return
 
 
@@ -107,14 +104,14 @@ class BankCardViewModel(application: Application, private val orderData: OrderDa
         val requestId = UUID.randomUUID().toString()
         Pikassa.init(API_KEY)
         Pikassa.sendCardData(
-            orderData.uuid,
+            orderData.invoiceUuid,
             requestId,
             PaymentMethod.BANK_CARD,
             CardDetails(
-                panField.value(),
+                panField.value().replace("\\s".toRegex(), ""),
                 holderField.value(),
-                expYearLD.value.toString(),
-                expMonthLD.value.toString(),
+                getYearFromString(expField.data.value),
+                getMonthFromString(expField.data.value),
                 cvcField.value(),
                 null
             ),

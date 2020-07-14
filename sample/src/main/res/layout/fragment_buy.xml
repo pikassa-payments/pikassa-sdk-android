@@ -70,8 +70,10 @@
                 android:layout_marginStart="@dimen/buy_margin_start"
                 android:layout_marginTop="4dp"
                 android:layout_marginEnd="@dimen/buy_margin_start"
+                android:clipToPadding="false"
+                android:gravity="center"
+                android:textColorHint="@android:color/black"
                 android:background="@color/colorBackground"
-                android:paddingTop="@dimen/common_margin"
                 app:boxCornerRadiusTopEnd="4dp"
                 app:boxCornerRadiusTopStart="4dp"
                 app:error="@{viewmodel.amountField.error.ld}"
@@ -79,24 +81,28 @@
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textviewEnterAmount">
 
-                <androidx.appcompat.widget.AppCompatEditText
+                <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/edittextEnterAmount"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/buy_input_height"
+                    android:layout_height="56dp"
                     android:autofillHints="@string/amount_placeholder"
+                    android:focusableInTouchMode="true"
+                    android:gravity="center_vertical"
                     android:hint="@string/amount_placeholder"
                     android:imeOptions="actionDone"
                     android:inputType="numberDecimal"
                     android:maxLength="5"
+                    android:paddingStart="@dimen/bank_card_pan_margin_top"
+                    android:singleLine="true"
                     android:text="@={viewmodel.amountField.data.ld}"
-                    android:focusableInTouchMode="true"
-                    android:singleLine="true"/>
+                    app:backgroundTint="@color/edittext_selector" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <androidx.appcompat.widget.AppCompatButton
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:layout_marginStart="@dimen/buy_margin_start"
+                android:layout_marginTop="16dp"
                 android:layout_marginEnd="@dimen/buy_margin_start"
                 android:onClick="@{() -> viewmodel.postBuy()}"
                 android:text="@string/button_buy"
@@ -108,11 +114,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/buy_margin_bottom"
+                android:contentDescription="@string/logo_app"
                 android:src="@drawable/pikassa"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                android:contentDescription="@string/logo_app" />
+                app:layout_constraintRight_toRightOf="parent" />
 
             <ProgressBar
                 android:id="@+id/progressBuy"

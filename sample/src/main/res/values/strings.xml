@@ -21,6 +21,9 @@
 
 
     <string name="amount_error">Не должно быть пустым или слишком большим!</string>
+    <string name="error_pan">Неверный номер карты</string>
+    <string name="error_holder">Только латинские буквы</string>
+    <string name="error_exp">Неверная дата</string>
     <string name="error_invalid_amount_of_numbers">Неверное количество введенных символов!</string>
     <string name="field_empty_error">Поле не может быть пустым</string>
 
