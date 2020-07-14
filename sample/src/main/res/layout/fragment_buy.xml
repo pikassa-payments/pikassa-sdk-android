@@ -9,7 +9,6 @@
 
         <import type="android.view.View" />
     </data>
-
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
@@ -104,6 +103,7 @@
                 android:layout_marginStart="@dimen/buy_margin_start"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="@dimen/buy_margin_start"
+                android:enabled="@{!viewmodel.isLoading()}"
                 android:onClick="@{() -> viewmodel.postBuy()}"
                 android:text="@string/button_buy"
                 app:layout_constraintLeft_toLeftOf="parent"

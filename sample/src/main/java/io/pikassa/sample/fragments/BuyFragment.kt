@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.AppBarConfiguration
 import io.pikassa.sample.R
 import io.pikassa.sample.databinding.FragmentBuyBinding
 import io.pikassa.sample.ext.hideKeyboard
@@ -22,7 +23,6 @@ class BuyFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val viewModel: BuyViewModel by viewModels()
-
         // Inflate the layout for this fragment
         val binding = FragmentBuyBinding.inflate(inflater, container, false)
             .apply {
