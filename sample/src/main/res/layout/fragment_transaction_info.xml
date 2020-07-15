@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -8,114 +9,147 @@
             type="io.pikassa.sample.viewmodels.TransactionInfoViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/colorPrimary">
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/textviewTransactionInfo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/common_margin"
-            android:text="@string/textview_TransactionInfo"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-        <androidx.cardview.widget.CardView
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:cardCornerRadius="@dimen/common_margin"
-            app:layout_constraintLeft_toLeftOf="parent"
-            android:layout_marginTop="@dimen/common_margin"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textviewTransactionInfo"
-            app:cardElevation="@dimen/common_margin">
-            <LinearLayout
-                android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/layout_bg">
+
+            <ImageView
+                android:id="@+id/imgShoppingCart"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="10dp">
+                android:layout_marginStart="@dimen/buy_margin_start"
+                android:layout_marginTop="@dimen/buy_margin_top"
+                android:contentDescription="@string/buy_description_cart"
+                android:src="@drawable/ic_shopping_cart"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/common_margin"
-                    android:orientation="horizontal">
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/buy_margin_title"
+                android:text="@string/buy_shop_title"
+                app:layout_constraintBottom_toBottomOf="@+id/imgShoppingCart"
+                app:layout_constraintLeft_toRightOf="@+id/imgShoppingCart"
+                app:layout_constraintTop_toTopOf="@+id/imgShoppingCart" />
 
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/invoice_uuid" />
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="@dimen/buy_separator_margin_top"
+                android:layout_marginEnd="@dimen/buy_separator_margin"
+                android:alpha="0.2"
+                android:background="@android:color/black"
+                app:layout_constraintLeft_toLeftOf="@+id/imgShoppingCart"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imgShoppingCart" />
 
-                    <TextView
-                        android:id="@+id/textViewInvoiceUUID"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="2"
-                        android:text="@={viewmodel.newUUID}" />
-                </LinearLayout>
+            <ImageView
+                android:id="@+id/imgStatusInvoice"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginTop="@dimen/info_margin_top"
+                android:src="@{viewmodel.orderStatus}"
+                app:layout_constraintLeft_toLeftOf="@id/imgShoppingCart"
+                app:layout_constraintTop_toBottomOf="@id/imgShoppingCart"
+                tools:src="@drawable/ic_invoice_accepted"
+                android:contentDescription="@string/status_of_transaction" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/common_margin"
-                    android:orientation="horizontal">
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/status_margin_eft"
+                android:textColor="@{viewmodel.orderStatus}"
+                android:text="@{viewmodel.orderStatus}"
+                app:layout_constraintBottom_toBottomOf="@id/imgStatusInvoice"
+                app:layout_constraintLeft_toRightOf="@id/imgStatusInvoice"
+                app:layout_constraintTop_toTopOf="@id/imgStatusInvoice"
+                tools:text="@string/text_invoice_accepted" />
 
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/amount" />
+            <TextView
+                android:id="@+id/textViewOrderNumTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/order_num_margin_start"
+                android:layout_marginTop="@dimen/status_margin_order_num"
+                android:text="@string/status_order_number"
+                android:textColor="@color/colorTextSecondary"
+                app:layout_constraintLeft_toLeftOf="@id/imgShoppingCart"
+                app:layout_constraintTop_toBottomOf="@+id/imgStatusInvoice" />
 
-                    <TextView
-                        android:id="@+id/textViewAmount"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="2"
-                        android:text="@={viewmodel.newAmount}" />
-                </LinearLayout>
+            <TextView
+                android:id="@+id/textViewOrderNumValue"
+                android:layout_width="wrap_content"
+                android:text="@{viewmodel.orderID}"
+                android:layout_height="wrap_content"
+                app:layout_constraintLeft_toLeftOf="@id/textViewOrderNumTitle"
+                app:layout_constraintTop_toBottomOf="@id/textViewOrderNumTitle"
+                tools:text="1-2030293297432-2" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/common_margin"
-                    android:orientation="horizontal">
+            <View
+                android:id="@+id/separator"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginStart="@dimen/buy_margin_start"
+                android:layout_marginTop="@dimen/order_num_margin_start"
+                android:layout_marginEnd="@dimen/buy_margin_start"
+                android:alpha="0.2"
+                android:background="@android:color/black"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewOrderNumValue" />
 
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/update_time" />
+            <TextView
+                android:id="@+id/textViewOrderSumTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/order_num_margin_start"
+                android:layout_marginTop="@dimen/order_num_margin_start"
+                android:text="@string/sum_title"
+                android:textColor="@color/colorTextSecondary"
+                app:layout_constraintLeft_toLeftOf="@id/imgShoppingCart"
+                app:layout_constraintTop_toBottomOf="@+id/separator" />
 
-                    <TextView
-                        android:id="@+id/textViewTimeUpdate"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="2"
-                        android:text="@={viewmodel.newTime}" />
-                </LinearLayout>
+            <TextView
+                android:id="@+id/textViewOrderSumValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{viewmodel.checkSum}"
+                app:layout_constraintLeft_toLeftOf="@id/textViewOrderSumTitle"
+                app:layout_constraintTop_toBottomOf="@id/textViewOrderSumTitle"
+                tools:text="1-2030293297432-2" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/common_margin"
-                    android:orientation="horizontal">
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/buttonAcceptInvoice"
+                style="@style/ButtonTransparentBorder"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginStart="@dimen/buy_margin_start"
+                android:layout_marginEnd="@dimen/buy_margin_start"
+                android:onClick="@{() -> viewmodel.newOrder()}"
+                android:layout_marginBottom="@dimen/status_button_margin_bottom"
+                android:text="@string/button_new_order"
+                app:layout_constraintBottom_toTopOf="@+id/imgPikassaLabel"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent" />
 
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/status" />
+            <ImageView
+                android:id="@+id/imgPikassaLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp"
+                android:contentDescription="@string/logo_app"
+                android:src="@drawable/ic_pikassa_small"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent" />
 
-                    <TextView
-                        android:id="@+id/textViewStatus"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="2"
-                        android:text="@={viewmodel.newStatus}" />
-                </LinearLayout>
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

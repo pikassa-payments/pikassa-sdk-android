@@ -1,48 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/navigation_sample"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/navigation_sample"
     app:startDestination="@id/buyFragment">
 
     <fragment
         android:id="@+id/buyFragment"
         android:name="io.pikassa.sample.fragments.BuyFragment"
-        android:label="BuyFragment" >
+        android:label="Pikassa sample">
         <action
             android:id="@+id/gotoCardInfo"
             app:destination="@id/bankCardFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"
             app:popUpTo="@id/buyFragment"
             app:popUpToInclusive="false" />
     </fragment>
     <fragment
         android:id="@+id/bankCardFragment"
         android:name="io.pikassa.sample.fragments.BankCardFragment"
-        android:label="BankCardFragment" >
+        android:label="Pikassa sample">
         <action
             android:id="@+id/goto_TransactionHistory"
             app:destination="@id/transactionInfoFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"
             app:popUpTo="@id/bankCardFragment"
-            app:popUpToInclusive="false" />
-        <argument
-            android:name="invoiceUuid"
-            app:argType="string" />
+            app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_bankCardFragment_to_webViewFragment"
             app:destination="@id/webViewFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"
             app:popUpTo="@id/bankCardFragment" />
         <argument
-            android:name="uuid"
-            app:argType="string" />
-        <argument
-            android:name="successUrl"
-            app:argType="string" />
-        <argument
-            android:name="failUrl"
-            app:argType="string" />
+            android:name="orderData"
+            app:argType="io.pikassa.sample.entities.OrderData" />
     </fragment>
     <fragment
         android:id="@+id/transactionInfoFragment"
         android:name="io.pikassa.sample.fragments.TransactionInfoFragment"
-        android:label="TransactionInfoFragment" >
+        android:label="Pikassa sample">
         <argument
             android:name="uuid"
             app:argType="string" />
@@ -50,11 +54,16 @@
     <fragment
         android:id="@+id/webViewFragment"
         android:name="io.pikassa.sample.fragments.WebViewFragment"
-        android:label="WebViewFragment" >
+        android:label="Pikassa sample">
         <action
             android:id="@+id/action_webViewFragment_to_transactionInfoFragment"
             app:destination="@id/transactionInfoFragment"
-            app:popUpTo="@id/bankCardFragment" />
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"
+            app:popUpTo="@id/bankCardFragment"
+            app:popUpToInclusive="true" />
         <argument
             android:name="url"
             app:argType="string" />

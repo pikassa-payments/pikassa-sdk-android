@@ -9,78 +9,128 @@
 
         <import type="android.view.View" />
     </data>
-
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/colorPrimary"
         tools:context=".fragments.BuyFragment">
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/textviewEnterAmount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/common_margin"
-            android:text="@string/textview_enter_amount"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.3" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/layout_bg">
 
-        <com.google.android.material.textfield.TextInputLayout
-            app:error="@{viewmodel.amountField.error.ld}"
-            android:id="@+id/TextInputEnterAmount"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/common_margin"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textviewEnterAmount">
+            <ImageView
+                android:id="@+id/imgShoppingCart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/buy_margin_start"
+                android:layout_marginTop="@dimen/buy_margin_top"
+                android:contentDescription="@string/buy_description_cart"
+                android:src="@drawable/ic_shopping_cart"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-            <EditText
-                android:id="@+id/edittextEnterAmount"
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/buy_margin_title"
+                android:text="@string/buy_shop_title"
+                app:layout_constraintBottom_toBottomOf="@+id/imgShoppingCart"
+                app:layout_constraintLeft_toRightOf="@+id/imgShoppingCart"
+                app:layout_constraintTop_toTopOf="@+id/imgShoppingCart" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="@dimen/buy_separator_margin_top"
+                android:layout_marginEnd="@dimen/buy_separator_margin"
+                android:alpha="0.2"
+                android:background="@android:color/black"
+                app:layout_constraintLeft_toLeftOf="@+id/imgShoppingCart"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imgShoppingCart" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textviewEnterAmount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/buy_margin_amount_top"
+                android:text="@string/textview_enter_amount"
+                android:textSize="@dimen/text_size_small"
+                app:layout_constraintLeft_toLeftOf="@+id/imgShoppingCart"
+                app:layout_constraintTop_toBottomOf="@+id/imgShoppingCart" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/TextInputEnterAmount"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/common_margin"
-                android:maxLength="5"
-                android:hint="@string/amount_placeholder"
-                android:singleLine="true"
-                android:text="@={viewmodel.amountField.data.ld}"
-                android:inputType="numberDecimal"
-                android:autofillHints="@string/amount_placeholder" />
-        </com.google.android.material.textfield.TextInputLayout>
+                android:layout_marginStart="@dimen/buy_margin_start"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="@dimen/buy_margin_start"
+                android:clipToPadding="false"
+                android:gravity="center"
+                android:textColorHint="@android:color/black"
+                android:background="@color/colorBackground"
+                app:boxCornerRadiusTopEnd="4dp"
+                app:boxCornerRadiusTopStart="4dp"
+                app:error="@{viewmodel.amountField.error.ld}"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textviewEnterAmount">
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/common_margin"
-            android:maxLines="1"
-            android:text="@string/kilo"
-            app:layout_constraintBottom_toBottomOf="@+id/TextInputEnterAmount"
-            app:layout_constraintLeft_toRightOf="@+id/TextInputEnterAmount"
-            app:layout_constraintTop_toTopOf="@+id/TextInputEnterAmount" />
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edittextEnterAmount"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:autofillHints="@string/amount_placeholder"
+                    android:focusableInTouchMode="true"
+                    android:gravity="center_vertical"
+                    android:hint="@string/amount_placeholder"
+                    android:imeOptions="actionDone"
+                    android:inputType="numberDecimal"
+                    android:maxLength="5"
+                    android:paddingStart="@dimen/bank_card_pan_margin_top"
+                    android:singleLine="true"
+                    android:text="@={viewmodel.amountField.data.ld}"
+                    app:backgroundTint="@color/edittext_selector" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/common_margin"
-            android:onClick="@{() -> viewmodel.postBuy()}"
-            android:text="@string/button_buy"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/TextInputEnterAmount" />
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginStart="@dimen/buy_margin_start"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="@dimen/buy_margin_start"
+                android:enabled="@{!viewmodel.isLoading()}"
+                android:onClick="@{() -> viewmodel.postBuy()}"
+                android:text="@string/button_buy"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/TextInputEnterAmount" />
 
-        <ProgressBar
-            android:id="@+id/progressBuy"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:translationZ="50dp"
-            android:visibility="@{viewmodel.isLoading() ? View.VISIBLE : View.GONE}"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/buy_margin_bottom"
+                android:contentDescription="@string/logo_app"
+                android:src="@drawable/pikassa"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent" />
+
+            <ProgressBar
+                android:id="@+id/progressBuy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:translationZ="50dp"
+                android:visibility="@{viewmodel.isLoading() ? View.VISIBLE : View.GONE}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

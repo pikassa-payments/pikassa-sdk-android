@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import io.pikassa.sample.R
 import io.pikassa.sample.databinding.FragmentTransactionInfoBinding
@@ -52,5 +53,9 @@ class TransactionInfoFragment : Fragment() {
         viewModel.noInternet.observe(
             viewLifecycleOwner,
             Observer { activity?.shortToast(getString(R.string.no_internet)) })
+        viewModel.newOrder.observe(
+            viewLifecycleOwner,
+            Observer { findNavController().navigateUp() }
+        )
     }
 }

@@ -29,7 +29,7 @@ class BuyViewModel(application: Application) : BaseViewModel(application) {
     var paymentCreated = SingleLiveEvent<OrderData>()
     private val coroutineScope = CoroutineScope(Dispatchers.IO)
 
-    val amountField = FormField<String, StringDesc>("123", liveBlock { kilos ->
+    val amountField = FormField<String, StringDesc>("", liveBlock { kilos ->
         if (kilos.isBlank() || kilos.toIntOrNull() == null || kilos.length > 10)
             application.getString(R.string.amount_error).desc()
         else

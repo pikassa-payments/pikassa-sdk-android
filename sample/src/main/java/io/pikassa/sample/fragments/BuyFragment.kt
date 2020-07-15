@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.AppBarConfiguration
 import io.pikassa.sample.R
 import io.pikassa.sample.databinding.FragmentBuyBinding
 import io.pikassa.sample.ext.hideKeyboard
@@ -22,7 +23,6 @@ class BuyFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val viewModel: BuyViewModel by viewModels()
-
         // Inflate the layout for this fragment
         val binding = FragmentBuyBinding.inflate(inflater, container, false)
             .apply {
@@ -36,12 +36,7 @@ class BuyFragment : Fragment() {
     private fun observeViewModel(viewModel: BuyViewModel) {
         viewModel.paymentCreated.observe(viewLifecycleOwner, Observer {
             hideKeyboard()
-            val action = BuyFragmentDirections.gotoCardInfo(
-                it.invoiceUuid,
-                it.uuid,
-                it.successUrl,
-                it.failUrl
-            )
+            val action = BuyFragmentDirections.gotoCardInfo(it)
             findNavController().navigate(action)
         })
         viewModel.isError.observe(
