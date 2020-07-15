@@ -55,7 +55,7 @@ class TransactionInfoFragment : Fragment() {
             Observer { activity?.shortToast(getString(R.string.no_internet)) })
         viewModel.newOrder.observe(
             viewLifecycleOwner,
-            Observer { findNavController().navigateUp() }
+            Observer { findNavController().navigate(TransactionInfoFragmentDirections.actionTransactionInfoFragmentToBuyFragment()) }
         )
     }
 }

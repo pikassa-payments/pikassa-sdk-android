@@ -66,8 +66,11 @@ class BankCardViewModel(application: Application, private val orderData: OrderDa
 
     val cvcField = FormField<String, StringDesc>(
         "",
-        liveBlock { _ ->
-            null
+        liveBlock { cvc ->
+            if(cvc.length != 3) {
+                " ".desc()
+            }
+            else null
         })
 
     private val fields = listOf(panField, holderField, expField, cvcField)
