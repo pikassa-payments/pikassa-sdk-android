@@ -35,12 +35,14 @@ class WebViewFragment : Fragment() {
                 view: WebView,
                 request: WebResourceRequest
             ): Boolean {
-                if (request.url.toString() == requireContext().resources.getString(R.string.payment_url_link)) {
-                    val action =
-                        WebViewFragmentDirections.actionWebViewFragmentToTransactionInfoFragment(
-                            args.uuid
-                        )
-                    findNavController().navigate(action)
+                when (request.url.toString()) {
+                    args.successUrl, args.failUrl -> {
+                        val action =
+                            WebViewFragmentDirections.actionWebViewFragmentToTransactionInfoFragment(
+                                args.uuid
+                            )
+                        findNavController().navigate(action)
+                    }
                 }
                 return false
             }

@@ -9,5 +9,8 @@ data class OrderData (
     val customerPhone: String,
     val customerEmail: String,
     val amount: Float,
-    val invoiceUuid: String
+    val invoiceUuid: String,
+    val successUrl: String,
+    val failUrl: String
+
 )
