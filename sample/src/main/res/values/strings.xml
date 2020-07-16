@@ -36,8 +36,8 @@
     <string name="text_invoice_accepted">Заказ успешно оплачен</string>
     <string name="text_invoice_cancelled">Ошибка проведения платежа</string>
     <string name="text_invoice_in_progress">Идет получение статуса платежа…</string>
-    <string name="status_order_number">Номер заказа</string>
-    <string name="sum_title">Сумма</string>
+    <string name="status_order_number">НОМЕР ЗАКАЗА</string>
+    <string name="sum_title">СУММА</string>
     <string name="button_new_order">новый заказ</string>
     <string name="status_of_transaction">status of transaction</string>
 </resources>

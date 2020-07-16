@@ -73,17 +73,12 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/TextInputEnterPan"
+                style="@style/PikassaFilledBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/buy_margin_start"
                 android:layout_marginTop="@dimen/bank_card_pan_margin_top"
                 android:layout_marginEnd="@dimen/buy_margin_start"
-                android:background="@color/colorBackground"
-                android:clipToPadding="false"
-                android:gravity="center"
-                android:textColorHint="@android:color/black"
-                app:boxCornerRadiusTopEnd="@dimen/rounded_corners"
-                app:boxCornerRadiusTopStart="@dimen/rounded_corners"
                 app:error="@{viewmodel.panField.error.ld}"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
@@ -92,30 +87,24 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/edittextPan"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/buy_input_height"
-                    android:focusableInTouchMode="true"
+                    android:layout_height="wrap_content"
                     android:hint="@string/pan_placeholder"
                     android:inputType="number"
+                    android:paddingStart="20dp"
+                    android:paddingEnd="0dp"
                     android:maxLength="23"
-                    android:paddingStart="@dimen/bank_card_pan_margin_top"
                     android:singleLine="true"
-                    android:text="@={viewmodel.panField.data.ld}"
-                    app:backgroundTint="@color/edittext_selector" />
+                    android:text="@={viewmodel.panField.data.ld}" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/TextInputEnterHolder"
+                style="@style/PikassaFilledBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/buy_margin_start"
                 android:layout_marginTop="@dimen/bank_margin_holder_top"
                 android:layout_marginEnd="@dimen/buy_margin_start"
-                android:background="@color/colorBackground"
-                android:clipToPadding="false"
-                android:gravity="center"
-                android:textColorHint="@android:color/black"
-                app:boxCornerRadiusTopEnd="@dimen/rounded_corners"
-                app:boxCornerRadiusTopStart="@dimen/rounded_corners"
                 app:error="@{viewmodel.holderField.error.ld}"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
@@ -124,28 +113,22 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/edittextCardHolder"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/buy_input_height"
-                    android:focusableInTouchMode="true"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="20dp"
+                    android:paddingEnd="0dp"
                     android:hint="@string/holder_placeholder"
-                    android:paddingStart="@dimen/bank_card_pan_margin_top"
                     android:singleLine="true"
-                    android:text="@={viewmodel.holderField.data.ld}"
-                    app:backgroundTint="@color/edittext_selector" />
+                    android:text="@={viewmodel.holderField.data.ld}" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/TextInputEnterExpirationDate"
+                style="@style/PikassaFilledBox"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/buy_margin_start"
                 android:layout_marginTop="@dimen/bank_margin_holder_top"
                 android:layout_marginEnd="@dimen/buy_margin_start"
-                android:background="@color/colorBackground"
-                android:clipToPadding="false"
-                android:gravity="center"
-                android:textColorHint="@android:color/black"
-                app:boxCornerRadiusTopEnd="@dimen/rounded_corners"
-                app:boxCornerRadiusTopStart="@dimen/rounded_corners"
                 app:error="@{viewmodel.expField.error.ld}"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/TextInputEnterHolder"
@@ -154,30 +137,24 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/edittextExpirationDate"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/buy_input_height"
-                    android:focusableInTouchMode="true"
+                    android:layout_height="wrap_content"
                     android:hint="@string/exp_placeholder"
                     android:inputType="number"
                     android:maxLength="5"
-                    android:paddingStart="@dimen/bank_card_pan_margin_top"
+                    android:paddingStart="20dp"
+                    android:paddingEnd="0dp"
                     android:singleLine="true"
-                    android:text="@={viewmodel.expField.data.ld}"
-                    app:backgroundTint="@color/edittext_selector" />
+                    android:text="@={viewmodel.expField.data.ld}" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                style="@style/PikassaFilledBox"
                 android:id="@+id/TextInputEnterCvc"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/common_margin"
                 android:layout_marginTop="@dimen/bank_margin_holder_top"
                 android:layout_marginEnd="@dimen/buy_margin_start"
-                android:background="@color/colorBackground"
-                android:clipToPadding="false"
-                android:gravity="center"
-                android:textColorHint="@android:color/black"
-                app:boxCornerRadiusTopEnd="@dimen/rounded_corners"
-                app:boxCornerRadiusTopStart="@dimen/rounded_corners"
                 app:error="@{viewmodel.cvcField.error.ld}"
                 app:layout_constraintLeft_toRightOf="@id/TextInputEnterExpirationDate"
                 app:layout_constraintRight_toRightOf="parent"
@@ -186,17 +163,16 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/edittextCvc"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/buy_input_height"
+                    android:layout_height="wrap_content"
                     android:autofillHints="@string/amount_placeholder"
-                    android:focusableInTouchMode="true"
                     android:hint="@string/cvv_placeholder"
                     android:imeOptions="actionDone"
                     android:inputType="numberPassword"
                     android:maxLength="3"
-                    android:paddingStart="@dimen/bank_card_pan_margin_top"
+                    android:paddingStart="20dp"
+                    android:paddingEnd="0dp"
                     android:singleLine="true"
-                    android:text="@={viewmodel.cvcField.data.ld}"
-                    app:backgroundTint="@color/edittext_selector" />
+                    android:text="@={viewmodel.cvcField.data.ld}"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <ImageView
@@ -229,15 +205,16 @@
                 android:layout_height="56dp"
                 android:layout_marginStart="@dimen/buy_margin_start"
                 android:layout_marginTop="52dp"
-                android:layout_marginBottom="24dp"
                 android:layout_marginEnd="@dimen/buy_margin_start"
+                android:layout_marginBottom="24dp"
                 android:enabled="@{!viewmodel.isLoading()}"
                 android:onClick="@{() -> viewmodel.requestPayment()}"
                 android:text="@{viewmodel.invoiceValue}"
+                app:layout_constraintBottom_toTopOf="@+id/imgPikassaLabel"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/imgVerified"
-                app:layout_constraintBottom_toTopOf="@+id/imgPikassaLabel" />
+                tools:text="Оплатить 1252.52 руб" />
 
             <ImageView
                 android:id="@+id/imgPikassaLabel"
