@@ -9,7 +9,7 @@
             type="io.pikassa.sample.viewmodels.TransactionInfoViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:tools="http://schemas.android.com/tools"
+    <FrameLayout xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/colorPrimary">
@@ -55,18 +55,18 @@
                 android:layout_width="32dp"
                 android:layout_height="32dp"
                 android:layout_marginTop="@dimen/info_margin_top"
+                android:contentDescription="@string/status_of_transaction"
                 android:src="@{viewmodel.orderStatus}"
                 app:layout_constraintLeft_toLeftOf="@id/imgShoppingCart"
                 app:layout_constraintTop_toBottomOf="@id/imgShoppingCart"
-                tools:src="@drawable/ic_invoice_accepted"
-                android:contentDescription="@string/status_of_transaction" />
+                tools:src="@drawable/ic_invoice_accepted" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/status_margin_eft"
-                android:textColor="@{viewmodel.orderStatus}"
                 android:text="@{viewmodel.orderStatus}"
+                android:textColor="@{viewmodel.orderStatus}"
                 app:layout_constraintBottom_toBottomOf="@id/imgStatusInvoice"
                 app:layout_constraintLeft_toRightOf="@id/imgStatusInvoice"
                 app:layout_constraintTop_toTopOf="@id/imgStatusInvoice"
@@ -79,15 +79,17 @@
                 android:layout_marginStart="@dimen/order_num_margin_start"
                 android:layout_marginTop="@dimen/status_margin_order_num"
                 android:text="@string/status_order_number"
+                android:letterSpacing="0.15"
                 android:textColor="@color/colorTextSecondary"
+                android:textSize="10sp"
                 app:layout_constraintLeft_toLeftOf="@id/imgShoppingCart"
                 app:layout_constraintTop_toBottomOf="@+id/imgStatusInvoice" />
 
             <TextView
                 android:id="@+id/textViewOrderNumValue"
                 android:layout_width="wrap_content"
-                android:text="@{viewmodel.orderID}"
                 android:layout_height="wrap_content"
+                android:text="@{viewmodel.orderID}"
                 app:layout_constraintLeft_toLeftOf="@id/textViewOrderNumTitle"
                 app:layout_constraintTop_toBottomOf="@id/textViewOrderNumTitle"
                 tools:text="1-2030293297432-2" />
@@ -112,7 +114,9 @@
                 android:layout_marginStart="@dimen/order_num_margin_start"
                 android:layout_marginTop="@dimen/order_num_margin_start"
                 android:text="@string/sum_title"
+                android:letterSpacing="0.15"
                 android:textColor="@color/colorTextSecondary"
+                android:textSize="10sp"
                 app:layout_constraintLeft_toLeftOf="@id/imgShoppingCart"
                 app:layout_constraintTop_toBottomOf="@+id/separator" />
 
@@ -132,8 +136,8 @@
                 android:layout_height="48dp"
                 android:layout_marginStart="@dimen/buy_margin_start"
                 android:layout_marginEnd="@dimen/buy_margin_start"
-                android:onClick="@{() -> viewmodel.newOrder()}"
                 android:layout_marginBottom="@dimen/status_button_margin_bottom"
+                android:onClick="@{() -> viewmodel.newOrder()}"
                 android:text="@string/button_new_order"
                 app:layout_constraintBottom_toTopOf="@+id/imgPikassaLabel"
                 app:layout_constraintLeft_toLeftOf="parent"
@@ -151,5 +155,5 @@
                 app:layout_constraintRight_toRightOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </FrameLayout>
 </layout>

@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Pikassa sample</string>
-    <string name="textview_enter_amount">Введите количество для покупки:</string>
+    <string name="textview_enter_amount">Введите количество товаров для покупки:</string>
     <string name="button_buy">Купить</string>
     <string name="amount_placeholder">Количество товаров в штуках</string>
     <string name="card_info">card info</string>
@@ -13,6 +13,7 @@
     <string name="error_pan">Неверный номер карты</string>
     <string name="error_holder">Только латинские буквы</string>
     <string name="error_exp">Неверная дата</string>
+    <string name="error_cvc">Неверный cvc код</string>
     <string name="error_invalid_amount_of_numbers">Неверное количество введенных символов!</string>
     <string name="field_empty_error">Поле не может быть пустым</string>
 
@@ -35,8 +36,8 @@
     <string name="text_invoice_accepted">Заказ успешно оплачен</string>
     <string name="text_invoice_cancelled">Ошибка проведения платежа</string>
     <string name="text_invoice_in_progress">Идет получение статуса платежа…</string>
-    <string name="status_order_number">номер заказа</string>
-    <string name="sum_title">сумма</string>
+    <string name="status_order_number">НОМЕР ЗАКАЗА</string>
+    <string name="sum_title">СУММА</string>
     <string name="button_new_order">новый заказ</string>
     <string name="status_of_transaction">status of transaction</string>
 </resources>

@@ -7,7 +7,6 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -45,21 +44,23 @@ class BankCardFragment : Fragment() {
 
             @SuppressLint("SetTextI18n")
             override fun onTextChanged(p0: CharSequence?, start: Int, removed: Int, added: Int) {
-                if (start == 1 && start+added == 2 && p0?.contains('/') == false) {
+                if (start == 1 && start + added == 2 && p0?.contains('/') == false) {
                     binding.edittextExpirationDate.setText("$p0/")
                     binding.edittextExpirationDate.setSelection(start + 2)
-                } else if (start == 3 && start-removed == 2 && p0?.contains('/') == true) {
+                } else if (start == 3 && start - removed == 2 && p0?.contains('/') == true) {
                     binding.edittextExpirationDate.setText(p0.toString().replace("/", ""))
-                    binding.edittextExpirationDate.setSelection(start-1 )
-                }
-                else if (start == 2 && start+added == 3 && p0?.contains('/') == false) {
+                    binding.edittextExpirationDate.setSelection(start - 1)
+                } else if (start == 2 && start + added == 3 && p0?.contains('/') == false) {
                     binding.edittextExpirationDate.setText("${p0.substring(0, 2)}/${p0[2]}")
-                    binding.edittextExpirationDate.setSelection(start+2)
+                    binding.edittextExpirationDate.setSelection(start + 2)
+                } else if (start == 2 && removed == 1 && p0.toString().length > 2 && p0?.contains('/') == false) {
+                    binding.edittextExpirationDate.setText("${p0.substring(0, 2)}/${p0.substring(2)}")
+                    binding.edittextExpirationDate.setSelection(start + 1)
                 }
             }
         })
 
-        binding.edittextPan.addTextChangedListener(object : SeparatorTextWatcher(' ', 4){
+        binding.edittextPan.addTextChangedListener(object : SeparatorTextWatcher(' ', 4) {
             override fun onAfterTextChanged(text: String) {
                 binding.edittextPan.run {
                     setText(text)
