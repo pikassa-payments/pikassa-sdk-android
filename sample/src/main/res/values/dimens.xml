@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="common_margin">8dp</dimen>
+    <dimen name="buy_margin_top">48dp</dimen>
+    <dimen name="buy_margin_start">32dp</dimen>
+    <dimen name="buy_margin_title">24dp</dimen>
+    <dimen name="common_text_size">16sp</dimen>
+    <dimen name="common_button_size">14sp</dimen>
+    <dimen name="buy_margin_amount_top">148dp</dimen>
+    <dimen name="buy_input_height">56dp</dimen>
+    <dimen name="text_size_small">12sp</dimen>
+    <dimen name="buy_margin_bottom">40dp</dimen>
+    <dimen name="buy_separator_margin">56dp</dimen>
+    <dimen name="buy_separator_margin_top">26dp</dimen>
+    <dimen name="rounded_corners">4dp</dimen>
+    <dimen name="bank_card_margin_top">100dp</dimen>
+    <dimen name="bank_card_title_margin">12dp</dimen>
+    <dimen name="bank_card_pan_margin_top">16dp</dimen>
+    <dimen name="bank_margin_holder_top">28dp</dimen>
+    <dimen name="bank_margin_verified">20dp</dimen>
+    <dimen name="bank_margin_label_pikassa">24dp</dimen>
+    <dimen name="info_margin_top">96dp</dimen>
+    <dimen name="status_margin_eft">20dp</dimen>
+    <dimen name="status_margin_order_num">52dp</dimen>
+    <dimen name="order_num_margin_start">12dp</dimen>
+    <dimen name="status_button_margin_bottom">24dp</dimen>
+    <dimen name="buy_margin_text_amount_top">4dp</dimen>
+</resources>

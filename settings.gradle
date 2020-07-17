@@ -1,0 +1,4 @@
+include ':sample'
+include ':sdk'
+include ':sdk'
+rootProject.name = "pikassa-android"
