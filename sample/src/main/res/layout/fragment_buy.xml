@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="viewmodel"
+            type="io.pikassa.sample.viewmodels.BuyViewModel" />
+
+        <import type="android.view.View" />
+    </data>
+
+    <FrameLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorPrimary"
+        tools:context=".fragments.BuyFragment">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/layout_bg">
+
+            <ImageView
+                android:id="@+id/imgShoppingCart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/buy_margin_start"
+                android:layout_marginTop="@dimen/buy_margin_top"
+                android:contentDescription="@string/buy_description_cart"
+                android:src="@drawable/ic_shopping_cart"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/buy_margin_title"
+                android:text="@string/buy_shop_title"
+                app:layout_constraintBottom_toBottomOf="@+id/imgShoppingCart"
+                app:layout_constraintLeft_toRightOf="@+id/imgShoppingCart"
+                app:layout_constraintTop_toTopOf="@+id/imgShoppingCart" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="@dimen/buy_separator_margin_top"
+                android:layout_marginEnd="@dimen/buy_separator_margin"
+                android:alpha="0.2"
+                android:background="@android:color/black"
+                app:layout_constraintLeft_toLeftOf="@+id/imgShoppingCart"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imgShoppingCart" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textviewEnterAmount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/buy_margin_amount_top"
+                android:text="@string/textview_enter_amount"
+                android:textSize="@dimen/text_size_small"
+                app:layout_constraintLeft_toLeftOf="@+id/imgShoppingCart"
+                app:layout_constraintTop_toBottomOf="@+id/imgShoppingCart" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/TextInputEnterAmount"
+                style="@style/PikassaFilledBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/buy_margin_start"
+                android:layout_marginTop="@dimen/buy_margin_text_amount_top"
+                android:layout_marginEnd="@dimen/buy_margin_start"
+                app:error="@{viewmodel.amountField.error.ld}"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textviewEnterAmount">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edittextEnterAmount"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:autofillHints="@string/amount_placeholder"
+                    android:hint="@string/amount_placeholder"
+                    android:inputType="numberDecimal"
+                    android:paddingStart="20dp"
+                    android:paddingEnd="0dp"
+                    android:maxLength="5"
+                    android:text="@={viewmodel.amountField.data.ld}" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginStart="@dimen/buy_margin_start"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="@dimen/buy_margin_start"
+                android:enabled="@{!viewmodel.isLoading()}"
+                android:onClick="@{() -> viewmodel.postBuy()}"
+                android:text="@string/button_buy"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/TextInputEnterAmount" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/buy_margin_bottom"
+                android:contentDescription="@string/logo_app"
+                android:src="@drawable/ic_pikassa"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent" />
+
+            <ProgressBar
+                android:id="@+id/progressBuy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:translationZ="50dp"
+                android:visibility="@{viewmodel.isLoading() ? View.VISIBLE : View.GONE}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </FrameLayout>
+</layout>

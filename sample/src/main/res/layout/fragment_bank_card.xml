@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewmodel"
+            type="io.pikassa.sample.viewmodels.BankCardViewModel" />
+
+        <import type="android.view.View" />
+    </data>
+
+    <ScrollView xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/layout_bg">
+
+            <ImageView
+                android:id="@+id/imgShoppingCart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/buy_margin_start"
+                android:layout_marginTop="@dimen/buy_margin_top"
+                android:contentDescription="@string/buy_description_cart"
+                android:src="@drawable/ic_shopping_cart"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/buy_margin_title"
+                android:text="@string/buy_shop_title"
+                app:layout_constraintBottom_toBottomOf="@+id/imgShoppingCart"
+                app:layout_constraintLeft_toRightOf="@+id/imgShoppingCart"
+                app:layout_constraintTop_toTopOf="@+id/imgShoppingCart" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="@dimen/buy_separator_margin_top"
+                android:layout_marginEnd="@dimen/buy_separator_margin"
+                android:alpha="0.2"
+                android:background="@android:color/black"
+                app:layout_constraintLeft_toLeftOf="@+id/imgShoppingCart"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imgShoppingCart" />
+
+            <ImageView
+                android:id="@+id/imgCard"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/bank_card_margin_top"
+                android:contentDescription="@string/card_info"
+                android:src="@drawable/ic_credit_card"
+                app:layout_constraintLeft_toLeftOf="@+id/imgShoppingCart"
+                app:layout_constraintTop_toBottomOf="@id/imgShoppingCart" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/bank_card_title_margin"
+                android:text="@string/bank_card_title"
+                app:layout_constraintBottom_toBottomOf="@id/imgCard"
+                app:layout_constraintLeft_toRightOf="@id/imgCard"
+                app:layout_constraintTop_toTopOf="@id/imgCard" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/TextInputEnterPan"
+                style="@style/PikassaFilledBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/buy_margin_start"
+                android:layout_marginTop="@dimen/bank_card_pan_margin_top"
+                android:layout_marginEnd="@dimen/buy_margin_start"
+                app:error="@{viewmodel.panField.error.ld}"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imgCard">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edittextPan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/pan_placeholder"
+                    android:inputType="number"
+                    android:paddingStart="20dp"
+                    android:paddingEnd="0dp"
+                    android:maxLength="23"
+                    android:singleLine="true"
+                    android:text="@={viewmodel.panField.data.ld}" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/TextInputEnterHolder"
+                style="@style/PikassaFilledBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/buy_margin_start"
+                android:layout_marginTop="@dimen/bank_margin_holder_top"
+                android:layout_marginEnd="@dimen/buy_margin_start"
+                app:error="@{viewmodel.holderField.error.ld}"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/TextInputEnterPan">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edittextCardHolder"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="20dp"
+                    android:paddingEnd="0dp"
+                    android:hint="@string/holder_placeholder"
+                    android:singleLine="true"
+                    android:text="@={viewmodel.holderField.data.ld}" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/TextInputEnterExpirationDate"
+                style="@style/PikassaFilledBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/buy_margin_start"
+                android:layout_marginTop="@dimen/bank_margin_holder_top"
+                android:layout_marginEnd="@dimen/buy_margin_start"
+                app:error="@{viewmodel.expField.error.ld}"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/TextInputEnterHolder"
+                app:layout_constraintWidth_percent="0.55">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edittextExpirationDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/exp_placeholder"
+                    android:inputType="number"
+                    android:maxLength="5"
+                    android:paddingStart="20dp"
+                    android:paddingEnd="0dp"
+                    android:singleLine="true"
+                    android:text="@={viewmodel.expField.data.ld}" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/PikassaFilledBox"
+                android:id="@+id/TextInputEnterCvc"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/common_margin"
+                android:layout_marginTop="@dimen/bank_margin_holder_top"
+                android:layout_marginEnd="@dimen/buy_margin_start"
+                app:error="@{viewmodel.cvcField.error.ld}"
+                app:layout_constraintLeft_toRightOf="@id/TextInputEnterExpirationDate"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/TextInputEnterHolder">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edittextCvc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:autofillHints="@string/amount_placeholder"
+                    android:hint="@string/cvv_placeholder"
+                    android:imeOptions="actionDone"
+                    android:inputType="numberPassword"
+                    android:maxLength="3"
+                    android:paddingStart="20dp"
+                    android:paddingEnd="0dp"
+                    android:singleLine="true"
+                    android:text="@={viewmodel.cvcField.data.ld}"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <ImageView
+                android:id="@+id/imgVerified"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/bank_margin_verified"
+                android:contentDescription="@string/verified_transaction"
+                android:src="@drawable/ic_verified"
+                app:layout_constraintLeft_toLeftOf="@+id/TextInputEnterExpirationDate"
+                app:layout_constraintTop_toBottomOf="@+id/TextInputEnterExpirationDate" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/common_margin"
+                android:layout_marginEnd="@dimen/buy_margin_start"
+                android:text="@string/text_verified"
+                android:textColor="@color/colorTextSecondary"
+                android:textSize="10sp"
+                app:layout_constraintBottom_toBottomOf="@id/imgVerified"
+                app:layout_constraintLeft_toRightOf="@+id/imgVerified"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/imgVerified"
+                tools:ignore="SmallSp" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/buttonAcceptInvoice"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginStart="@dimen/buy_margin_start"
+                android:layout_marginTop="52dp"
+                android:layout_marginEnd="@dimen/buy_margin_start"
+                android:layout_marginBottom="24dp"
+                android:enabled="@{!viewmodel.isLoading()}"
+                android:onClick="@{() -> viewmodel.requestPayment()}"
+                android:text="@{viewmodel.invoiceValue}"
+                app:layout_constraintBottom_toTopOf="@+id/imgPikassaLabel"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imgVerified"
+                tools:text="Оплатить 1252.52 руб" />
+
+            <ImageView
+                android:id="@+id/imgPikassaLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/bank_margin_label_pikassa"
+                android:layout_marginBottom="24dp"
+                android:contentDescription="@string/logo_app"
+                android:src="@drawable/ic_pikassa_small"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent" />
+
+
+            <ProgressBar
+                android:id="@+id/progressBuy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:translationZ="50dp"
+                android:visibility="@{viewmodel.isLoading() ? View.VISIBLE : View.GONE}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+</layout>
