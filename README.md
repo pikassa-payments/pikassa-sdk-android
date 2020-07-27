@@ -44,7 +44,8 @@ fun sendPaymentDetails(
     )
 ```
 где ```uuid``` - идентификатор счета на оплату, ```requestId``` - идентификатор заказа, ```paymentMethod``` - тип оплаты (может быть ***BankCard, WMR, YandexMoney, Mobile***), ```details``` - справочник key/value информации по карте, ```onSuccess``` - результат успешной передачи карточных данных, возвращает информацию с сервера в случае успеха (```ResponseData```), ```onError``` - ошибка при передаче данных, возвращает ошибку (```ResponseError```).
-Для удобства основные поля, исползуемые в справочнике, вынесены в ```enum class DetailsFields```, его структура:
+
+Для удобства основные поля, используемые в справочнике, вынесены в ```enum class DetailsFields```, его структура:
 ```kotlin
 enum class DetailsFields(val field: String) {
     PAN("pan"),
