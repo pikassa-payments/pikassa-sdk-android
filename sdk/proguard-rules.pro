@@ -89,14 +89,14 @@
 
 # Application classes that will be serialized/deserialized over Gson
 -keep class io.pikassa.sdk.entities.BodyRequest { *; }
--keep class io.pikassa.sdk.entities.CardDetailResponse { *; }
--keep class io.pikassa.sdk.entities.CardDetails { *; }
+-keep class io.pikassa.sdk.entities.PaymentDetailResponse { *; }
 -keep class io.pikassa.sdk.entities.PaymentErrorCode { *; }
 -keep class io.pikassa.sdk.entities.PaymentMethod { *; }
 -keep class io.pikassa.sdk.entities.RedirectResponse { *; }
 -keep class io.pikassa.sdk.entities.ResponseData { *; }
 -keep class io.pikassa.sdk.entities.ResponseError { *; }
 -keep class io.pikassa.sdk.entities.interfaces.IDescription { *; }
+-keep class io.pikassa.sdk.entities.DetailsFields { *; }
 -keep class com.google.gson.examples.android.model.** { *; }
 
 # Prevent proguard from stripping interface information from TypeAdapterFactory,
