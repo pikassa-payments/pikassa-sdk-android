@@ -20,7 +20,7 @@
     </fragment>
     <fragment
         android:id="@+id/bankCardFragment"
-        android:name="io.pikassa.sample.fragments.BankCardFragment"
+        android:name="io.pikassa.sample.fragments.BankPaymentFragment"
         android:label="Pikassa sample">
         <action
             android:id="@+id/goto_TransactionHistory"

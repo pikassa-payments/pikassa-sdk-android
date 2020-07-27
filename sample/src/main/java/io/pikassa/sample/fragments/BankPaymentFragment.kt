@@ -21,9 +21,9 @@ import io.pikassa.sample.viewmodels.BankCardViewModel
 import io.pikassa.sample.viewmodels.BankCardViewModelFactory
 
 
-class BankCardFragment : Fragment() {
+class BankPaymentFragment : Fragment() {
 
-    private val args: BankCardFragmentArgs by navArgs()
+    private val args: BankPaymentFragmentArgs by navArgs()
     private val viewModel: BankCardViewModel by viewModels {
         BankCardViewModelFactory(requireActivity().application, args.orderData)
     }
@@ -81,7 +81,7 @@ class BankCardFragment : Fragment() {
             //activity?.shortToast(it.toString())
             val redirect = it.redirect
             if (redirect != null) {
-                val action = BankCardFragmentDirections.actionBankCardFragmentToWebViewFragment(
+                val action = BankPaymentFragmentDirections.actionBankCardFragmentToWebViewFragment(
                     redirect.url,
                     args.orderData.uuid,
                     args.orderData.successUrl,
@@ -89,7 +89,7 @@ class BankCardFragment : Fragment() {
                 )
                 findNavController().navigate(action)
             } else {
-                val action = BankCardFragmentDirections.gotoTransactionHistory(args.orderData.uuid)
+                val action = BankPaymentFragmentDirections.gotoTransactionHistory(args.orderData.uuid)
                 findNavController().navigate(action)
             }
         })

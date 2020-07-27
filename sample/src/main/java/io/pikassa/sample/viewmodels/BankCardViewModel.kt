@@ -10,10 +10,7 @@ import io.pikassa.sample.R
 import io.pikassa.sample.entities.OrderData
 import io.pikassa.sample.utils.SingleLiveEvent
 import io.pikassa.sdk.Pikassa
-import io.pikassa.sdk.entities.CardDetails
-import io.pikassa.sdk.entities.PaymentMethod
-import io.pikassa.sdk.entities.ResponseData
-import io.pikassa.sdk.entities.ResponseError
+import io.pikassa.sdk.entities.*
 import java.util.*
 
 /**
@@ -106,18 +103,26 @@ class BankCardViewModel(application: Application, private val orderData: OrderDa
         isLoading.value = true
         val requestId = UUID.randomUUID().toString()
         Pikassa.init(API_KEY)
-        Pikassa.sendCardData(
-            orderData.invoiceUuid,
-            requestId,
-            PaymentMethod.BANK_CARD,
-            CardDetails(
-                panField.value().replace("\\s".toRegex(), ""),
-                holderField.value(),
-                getYearFromString(expField.data.value),
-                getMonthFromString(expField.data.value),
-                cvcField.value(),
-                null
-            ),
+        val details = mapOf(
+            DetailsFields.PAN.field to panField.value().replace("\\s".toRegex(), ""),
+            DetailsFields.CARD_HOLDER.field to holderField.value(),
+            DetailsFields.EXP_YEAR.field to getYearFromString(expField.data.value),
+            DetailsFields.EXP_MONTH.field to getMonthFromString(expField.data.value),
+            DetailsFields.CVC.field to cvcField.value()
+        )
+        Pikassa.sendPaymentDetails(
+            uuid = orderData.invoiceUuid,
+            requestId = requestId,
+            paymentMethod = PaymentMethod.BANK_CARD,
+            details = details,
+//            PaymentDetails(
+//                panField.value().replace("\\s".toRegex(), ""),
+//                holderField.value(),
+//                getYearFromString(expField.data.value),
+//                getMonthFromString(expField.data.value),
+//                cvcField.value(),
+//                null
+//            ),
             onSuccess = {
                 isLoading.value = false
                 requestReceived.value = it

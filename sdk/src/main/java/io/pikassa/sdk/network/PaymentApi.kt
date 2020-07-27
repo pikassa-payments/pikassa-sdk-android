@@ -1,7 +1,7 @@
 package io.pikassa.sdk.network
 
 import io.pikassa.sdk.entities.BodyRequest
-import io.pikassa.sdk.entities.CardDetailResponse
+import io.pikassa.sdk.entities.PaymentDetailResponse
 import retrofit2.http.Body
 import retrofit2.http.Header
 import retrofit2.http.PUT
@@ -26,5 +26,5 @@ interface PaymentApi {
         @Path("uuid") uuid: String,
         @Header("x-api-key") apiKey: String,
         @Body bodyRequest: BodyRequest
-    ): CardDetailResponse
+    ): PaymentDetailResponse
 }

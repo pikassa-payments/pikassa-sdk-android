@@ -10,5 +10,5 @@ All rights received.
 data class BodyRequest(
     val requestId: String,
     val paymentMethod: PaymentMethod,
-    val details: CardDetails
+    val details: Map<String, String>
 )

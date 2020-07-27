@@ -29,11 +29,11 @@ object Pikassa {
         paymentRepository = PaymentRepository(PaymentHelper())
     }
 
-    fun sendCardData(
+    fun sendPaymentDetails(
         uuid: String,
         requestId: String,
         paymentMethod: PaymentMethod = PaymentMethod.BANK_CARD,
-        details: CardDetails,
+        details: Map<String, String>,
         onSuccess: (ResponseData) -> Unit,
         onError: (ResponseError) -> Unit
     ) {

@@ -1,9 +1,6 @@
 package io.pikassa.sdk
 
-import io.pikassa.sdk.entities.CardDetails
-import io.pikassa.sdk.entities.PaymentMethod
-import io.pikassa.sdk.entities.ResponseData
-import io.pikassa.sdk.entities.ResponseError
+import io.pikassa.sdk.entities.*
 import org.junit.Test
 
 /**
@@ -22,11 +19,16 @@ class PikassaTest {
         val expYear = "19"
         val expMonth = "12"
         val cvc = "123"
-        val someParam = mapOf(Pair("key1", "value1"), Pair("key2", 5))
-        val details = CardDetails(pan, cardHolder, expYear, expMonth, cvc, someParam)
+        val details = mapOf(
+            DetailsFields.PAN.field to pan,
+            DetailsFields.CARD_HOLDER.field to cardHolder,
+            DetailsFields.EXP_YEAR.field to expYear,
+            DetailsFields.EXP_MONTH.field to expMonth,
+            DetailsFields.CVC.field to cvc
+        )
 
         try {
-            Pikassa.sendCardData(
+            Pikassa.sendPaymentDetails(
                 uuid,
                 requestId,
                 paymentMethod,
