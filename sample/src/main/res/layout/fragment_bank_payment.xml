@@ -6,7 +6,7 @@
 
         <variable
             name="viewmodel"
-            type="io.pikassa.sample.viewmodels.BankCardViewModel" />
+            type="io.pikassa.sample.viewmodels.BankPaymentViewModel" />
 
         <import type="android.view.View" />
     </data>

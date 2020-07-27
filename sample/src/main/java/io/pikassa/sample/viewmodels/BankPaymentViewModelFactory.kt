@@ -9,10 +9,10 @@ import io.pikassa.sample.entities.OrderData
 Created by pikassa, support@pikassa.io on 02,Июль,2020
 All rights received.
  */
-class BankCardViewModelFactory(
+class BankPaymentViewModelFactory(
     private val application: Application,
     private val myOrderData: OrderData
 ) : ViewModelProvider.NewInstanceFactory() {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T =
-        BankCardViewModel(application, myOrderData) as T
+        BankPaymentViewModel(application, myOrderData) as T
 }

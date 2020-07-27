@@ -17,7 +17,7 @@ import java.util.*
 Created by pikassa, support@pikassa.io on 29,Июнь,2020
 All rights received.
  */
-class BankCardViewModel(application: Application, private val orderData: OrderData) :
+class BankPaymentViewModel(application: Application, private val orderData: OrderData) :
     BaseViewModel(application) {
     companion object {
         // api key for payment request

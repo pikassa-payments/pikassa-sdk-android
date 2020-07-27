@@ -13,26 +13,26 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import io.pikassa.sample.R
-import io.pikassa.sample.databinding.FragmentBankCardBinding
+import io.pikassa.sample.databinding.FragmentBankPaymentBinding
 import io.pikassa.sample.ext.hideKeyboard
 import io.pikassa.sample.ext.shortToast
 import io.pikassa.sample.helpers.SeparatorTextWatcher
-import io.pikassa.sample.viewmodels.BankCardViewModel
-import io.pikassa.sample.viewmodels.BankCardViewModelFactory
+import io.pikassa.sample.viewmodels.BankPaymentViewModel
+import io.pikassa.sample.viewmodels.BankPaymentViewModelFactory
 
 
 class BankPaymentFragment : Fragment() {
 
     private val args: BankPaymentFragmentArgs by navArgs()
-    private val viewModel: BankCardViewModel by viewModels {
-        BankCardViewModelFactory(requireActivity().application, args.orderData)
+    private val viewModel: BankPaymentViewModel by viewModels {
+        BankPaymentViewModelFactory(requireActivity().application, args.orderData)
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val binding = FragmentBankCardBinding.inflate(inflater, container, false)
+        val binding = FragmentBankPaymentBinding.inflate(inflater, container, false)
         binding.apply {
             lifecycleOwner = viewLifecycleOwner
             viewmodel = viewModel
