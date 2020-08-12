@@ -15,7 +15,6 @@ class PaymentRepository(private val paymentHelper: PaymentHelper) {
     suspend fun requestPayment(
         uuid: String,
         apiKey: String,
-        bodyRequest: BodyRequest
-    ) =
-        paymentHelper.requestPayment(uuid, apiKey, bodyRequest)
+        bodyRequest: BodyRequest<*>
+    ) = paymentHelper.requestPayment(uuid, apiKey, bodyRequest)
 }

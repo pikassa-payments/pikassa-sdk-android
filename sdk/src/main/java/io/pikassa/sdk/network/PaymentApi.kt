@@ -1,7 +1,8 @@
 package io.pikassa.sdk.network
 
 import io.pikassa.sdk.entities.BodyRequest
-import io.pikassa.sdk.entities.PaymentDetailResponse
+import io.pikassa.sdk.entities.CardDetailResponse
+import io.pikassa.sdk.entities.CardDetails
 import retrofit2.http.Body
 import retrofit2.http.Header
 import retrofit2.http.PUT
@@ -22,9 +23,21 @@ interface PaymentApi {
      * @param apiKey key for access to payment
      */
     @PUT("invoices/{uuid}/pay")
-    suspend fun payByCard(
+    suspend fun payByCustomMethod(
         @Path("uuid") uuid: String,
         @Header("x-api-key") apiKey: String,
-        @Body bodyRequest: BodyRequest
-    ): PaymentDetailResponse
+        @Body bodyRequest: BodyRequest<Map<String, String>>
+    ): CardDetailResponse
+
+    /**
+     * method for payment
+     * @param uuid payment identificator
+     * @param apiKey key for access to payment
+     */
+    @PUT("invoices/{uuid}/pay")
+    suspend fun  payByCard(
+        @Path("uuid") uuid: String,
+        @Header("x-api-key") apiKey: String,
+        @Body bodyRequest: BodyRequest<CardDetails>
+    ): CardDetailResponse
 }

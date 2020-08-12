@@ -10,14 +10,17 @@ import io.pikassa.sample.R
 import io.pikassa.sample.entities.OrderData
 import io.pikassa.sample.utils.SingleLiveEvent
 import io.pikassa.sdk.Pikassa
-import io.pikassa.sdk.entities.*
+import io.pikassa.sdk.entities.CardDetails
+import io.pikassa.sdk.entities.PaymentMethod
+import io.pikassa.sdk.entities.ResponseData
+import io.pikassa.sdk.entities.ResponseError
 import java.util.*
 
 /**
 Created by pikassa, support@pikassa.io on 29,Июнь,2020
 All rights received.
  */
-class BankPaymentViewModel(application: Application, private val orderData: OrderData) :
+class BankCardViewModel(application: Application, private val orderData: OrderData) :
     BaseViewModel(application) {
     companion object {
         // api key for payment request
@@ -32,7 +35,11 @@ class BankPaymentViewModel(application: Application, private val orderData: Orde
     val panField = FormField<String, StringDesc>(
         "",
         liveBlock { pan ->
-            if (pan.isBlank() || pan.replace("\\s".toRegex(), "").length < application.resources.getInteger(R.integer.pan_amount))
+            if (pan.isBlank() || pan.replace(
+                    "\\s".toRegex(),
+                    ""
+                ).length < application.resources.getInteger(R.integer.pan_amount)
+            )
                 application.getString(R.string.error_pan).desc()
             else
                 null
@@ -64,10 +71,9 @@ class BankPaymentViewModel(application: Application, private val orderData: Orde
     val cvcField = FormField<String, StringDesc>(
         "",
         liveBlock { cvc ->
-            if(cvc.length != 3) {
+            if (cvc.length != 3) {
                 " ".desc()
-            }
-            else null
+            } else null
         })
 
     private val fields = listOf(panField, holderField, expField, cvcField)
@@ -103,26 +109,19 @@ class BankPaymentViewModel(application: Application, private val orderData: Orde
         isLoading.value = true
         val requestId = UUID.randomUUID().toString()
         Pikassa.init(API_KEY)
-        val details = mapOf(
-            DetailsFields.PAN.field to panField.value().replace("\\s".toRegex(), ""),
-            DetailsFields.CARD_HOLDER.field to holderField.value(),
-            DetailsFields.EXP_YEAR.field to getYearFromString(expField.data.value),
-            DetailsFields.EXP_MONTH.field to getMonthFromString(expField.data.value),
-            DetailsFields.CVC.field to cvcField.value()
-        )
-        Pikassa.sendPaymentDetails(
-            uuid = orderData.invoiceUuid,
-            requestId = requestId,
-            paymentMethod = PaymentMethod.BANK_CARD,
-            details = details,
-//            PaymentDetails(
-//                panField.value().replace("\\s".toRegex(), ""),
-//                holderField.value(),
-//                getYearFromString(expField.data.value),
-//                getMonthFromString(expField.data.value),
-//                cvcField.value(),
-//                null
-//            ),
+        Pikassa.sendPaymentData(
+            orderData.invoiceUuid,
+            requestId,
+            PaymentMethod.BankCard(
+                CardDetails(
+                    panField.value().replace("\\s".toRegex(), ""),
+                    holderField.value(),
+                    getYearFromString(expField.data.value),
+                    getMonthFromString(expField.data.value),
+                    cvcField.value(),
+                    null
+                )
+            ),
             onSuccess = {
                 isLoading.value = false
                 requestReceived.value = it
