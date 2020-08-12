@@ -16,7 +16,7 @@ allprojects {
     }
 }
 ```
-**Step 2.** Add the dependency
+**Шаг 2.** Добавьте зависимость
 
 ```gradle
 dependencies {
@@ -26,72 +26,72 @@ dependencies {
 ```
 ***
 # Пример использования
-Работа с библиотекой осуществляется через объект ```Pikassa```, у которого доступны 3 метода: ```init(), sendPaymentDetails(), close() ```. Для начала необходимо вызвать метод ```init```:
+Работа с библиотекой осуществляется через объект ```Pikassa```, у которого доступны 3 метода: ```init(), sendCardData(), close() ```. Для начала необходимо вызвать метод ```init```:
 ```kotlin
 Pikassa.init("your_api_key")
 ```
 где ```"your_api_key"``` - ключ доступа.
 
-После инициализации можно вызвать метод отправки карточных данных:
+После инициализации можно вызвать метод получения карточных данных:
 ```kotlin
-fun sendPaymentDetails(
+fun sendCardData(
         uuid: String,
         requestId: String,
-        paymentMethod: PaymentMethod = PaymentMethod.BANK_CARD,
-        details: Map<String, String>,
+        paymentMethod: PaymentMethod,
         onSuccess: (ResponseData) -> Unit,
         onError: (ResponseError) -> Unit
     )
 ```
-где ```uuid``` - идентификатор счета на оплату, ```requestId``` - идентификатор заказа, ```paymentMethod``` - тип оплаты (может быть ***BankCard, WMR, YandexMoney, Mobile***), ```details``` - справочник key/value информации по карте, ```onSuccess``` - результат успешной передачи карточных данных, возвращает информацию с сервера в случае успеха (```ResponseData```), ```onError``` - ошибка при передаче данных, возвращает ошибку (```ResponseError```).
+где ```uuid``` - идентификатор счета на оплату, ```requestId``` - идентификатор заказа, ```paymentMethod``` - тип оплаты (может быть ***BankCard, Custom***, описание ниже), ```onSuccess``` - результат успешной передачи карточных данных, возвращает информацию с сервера в случае успеха (```ResponseData```), ```onError``` - ошибка при передаче данных, возвращает ошибку (```ResponseError```).
 
-Для удобства основные поля, используемые в справочнике, вынесены в ```enum class DetailsFields```, его структура:
+Структура ```PaymentMethod```:
 ```kotlin
-enum class DetailsFields(val field: String) {
-    PAN("pan"),
-    CARD_HOLDER("cardHolder"),
-    EXP_YEAR("expYear"),
-    EXP_MONTH("expMonth"),
-    CVC("cvc")
+sealed class PaymentMethod {
+    data class BankCard(
+        val pan: String,
+        val cardHolder: String,
+        val expYear: String,
+        val expMonth: String,
+        val cvc: String,
+        val someParam: Map<String, Any>?
+    ) : PaymentMethod()
+
+    data class Custom(
+        val data: Map<String, String>
+    ) : PaymentMethod()
 }
 ```
-Здесь:
-```pan``` - номер карты (строка 16-19 знаков, указывающая идентификатор карты);
+Описание  ```PaymentMethod.BankCard```:
+```pan``` - номер карты (строка 16 знаков, указывающие идентификатор карты);
 ```cardHolder``` - владелец карты;
 ```expYear``` - год окончания срока действия карты (формат "YY");
 ```expMonth``` - месяц окончания срока действия карты (формат "mm");
 ```cvc``` - код с обратной стороны (3 цифры);
 
-Пример создания справочника информации по карте:
+Пример:
 ```kotlin
-val paymentDetails = mapOf(
-            DetailsFields.PAN.field to "4111111111111111",
-            DetailsFields.CARD_HOLDER.field to "ivan ivanov",
-            DetailsFields.EXP_YEAR.field to "24",
-            DetailsFields.EXP_MONTH.field to "12",
-            DetailsFields.CVC.field to "123"
-        )
-```
-В случае успеха выполнения отправки данных, в onSuccess приходит ответ ResponseData, структура которого выглядит следующим образом:
-```kotlin
-data class ResponseData(
-    val uuid: String,
-    val requestId: String,
-    val redirect: RedirectResponse?
+PaymentMethod.BankCard(
+    pan = "4111111111111111",
+    cardHolder = "ivan ivanov",
+    expYear = "24",
+    expMonth = "12",
+    cvc = "123"
 )
 ```
-```uuid``` - идентификатор платежа; 
-```requestId``` - идентификатор запроса
-```redirect``` - ссылка на редирект 3-d secure. Может быть нулевым, если аутентификация не нужна при платеже. В случае, если ненулевое поле, то структура следующая:
 
+
+Описание  ```PaymentMethod.Custom```:
+```data``` - тип данных Map (словарь) строка - строка;
+
+Пример:
 ```kotlin
-data class RedirectResponse(
-    val url: String,
-    val method: String,
-    val params: List<Pair<String, String>>?
+PaymentMethod.Custom(
+    data = mapOf(
+               "paymentMethod" to "Mobile",
+               "phone" to "+79999999999" 
+            )
 )
 ```
-Здесь основным параметром является ```url```, в котором хранится ссылка на редирект, по которому нужно пройти для подтверждения платежа. 
 
 Для завершения работы метода и в случаях когда работа метода ещё не завершена, а жизненный цикл ***Activity/Fragment*** где он вызван - уже завершен, рекомендуется вызывать метод ```close()``` в методах уничтожения экрана (```onDestroy()```, ```onDestroyView()```).
 ***

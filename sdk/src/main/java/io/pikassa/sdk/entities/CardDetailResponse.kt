@@ -10,7 +10,7 @@ All rights received.
  * @param success the bank request result
  * @param data
  */
-data class PaymentDetailResponse(
+data class CardDetailResponse(
     val success: Boolean,
     val data: ResponseData?,
     val error: ResponseError?
