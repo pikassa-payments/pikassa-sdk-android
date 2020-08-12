@@ -7,8 +7,8 @@ All rights received.
 /**
  * Class representing body of payment request
  */
-data class BodyRequest(
+data class BodyRequest<D>(
     val requestId: String,
-    val paymentMethod: PaymentMethod,
-    val details: Map<String, String>
+    val paymentMethod: String,
+    val details: D
 )

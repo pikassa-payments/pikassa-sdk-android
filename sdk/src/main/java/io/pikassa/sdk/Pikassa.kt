@@ -29,15 +29,14 @@ object Pikassa {
         paymentRepository = PaymentRepository(PaymentHelper())
     }
 
-    fun sendPaymentDetails(
+    fun sendPaymentData(
         uuid: String,
         requestId: String,
-        paymentMethod: PaymentMethod = PaymentMethod.BANK_CARD,
-        details: Map<String, String>,
+        paymentMethod: PaymentMethod<*>,
         onSuccess: (ResponseData) -> Unit,
         onError: (ResponseError) -> Unit
     ) {
-        val body = BodyRequest(requestId, paymentMethod, details)
+        val body = BodyRequest(requestId, paymentMethod.getApiAlias(), paymentMethod.details)
         job = CoroutineScope(Dispatchers.IO).launch {
             try {
                 val response =
