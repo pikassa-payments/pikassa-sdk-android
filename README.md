@@ -6,8 +6,23 @@
 android sdk version: 21+
 ***
 # Подключение библиотеки в проект
+**Шаг 1.** Добавьте репозиторий JitPack в ваш файл сборки
+Добавьте его в свой корневой build.gradle в конце репозитория:
 ```gradle
-implementation 'com.github.pikassa-payments:pikassa-sdk-android:0.1.2'
+allprojects {
+    repositories {
+        ...
+        maven { url 'https://jitpack.io' }
+    }
+}
+```
+**Шаг 2.** Добавьте зависимость
+
+```gradle
+dependencies {
+    ...
+    implementation 'com.github.pikassa-payments:pikassa-sdk-android:Tag'
+}
 ```
 ***
 # Пример использования
