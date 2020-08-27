@@ -118,8 +118,7 @@ class BankCardViewModel(application: Application, private val orderData: OrderDa
                     holderField.value(),
                     getYearFromString(expField.data.value),
                     getMonthFromString(expField.data.value),
-                    cvcField.value(),
-                    null
+                    cvcField.value()
                 )
             ),
             onSuccess = {
