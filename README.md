@@ -52,8 +52,7 @@ sealed class PaymentMethod {
         val cardHolder: String,
         val expYear: String,
         val expMonth: String,
-        val cvc: String,
-        val someParam: Map<String, Any>?
+        val cvc: String
     ) : PaymentMethod()
 
     data class Custom(
