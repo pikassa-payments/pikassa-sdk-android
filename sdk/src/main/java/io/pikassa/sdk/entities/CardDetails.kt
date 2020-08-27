@@ -12,13 +12,11 @@ All rights received.
  * @param expYear card expiration (year)
  * @param expMonth card expiration (month)
  * @param cvc number from the bottom side of bank card
- * @param someParam additional params
  */
 data class CardDetails(
     val pan: String,
     val cardHolder: String,
     val expYear: String,
     val expMonth: String,
-    val cvc: String,
-    val someParam: Map<String, Any>?
+    val cvc: String
 )

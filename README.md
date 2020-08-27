@@ -34,10 +34,10 @@ Pikassa.init("your_api_key")
 
 После инициализации можно вызвать метод получения деталей платежа:
 ```kotlin
-fun sendCardData(
+fun sendPaymentData(
         uuid: String,
         requestId: String,
-        paymentMethod: PaymentMethod,
+        paymentMethod: PaymentMethod<*>,
         onSuccess: (ResponseData) -> Unit,
         onError: (ResponseError) -> Unit
     )
@@ -114,6 +114,16 @@ data class RedirectResponse(
 ```
 Здесь основным параметром является ```url```, в котором хранится ссылка на редирект, по которому нужно пройти для подтверждения платежа. 
 
+В случае же неудачного запроса, в onError приходит ResponseError, его структура следующая:
+```kotlin
+data class ResponseError(
+    val code: PaymentErrorCode,
+    val message: String
+)
+```
+где
+```code``` - код ошибки с сервера ([описание кодов ошибок можно посмотреть здесь](https://pikassa.io/docs/#8c0b7c9f1c))
+```message``` - тело сообщения ошибки
 
 Для завершения работы метода и в случаях когда работа метода ещё не завершена, а жизненный цикл ***Activity/Fragment*** где он вызван - уже завершен, рекомендуется вызывать метод ```close()``` в методах уничтожения экрана (```onDestroy()```, ```onDestroyView()```).
 ***
